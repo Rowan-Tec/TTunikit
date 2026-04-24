@@ -9,8 +9,13 @@ class Pages extends Controller
 {
     public function index(Request $request, string $slug)
     {
+        // Normalize URL slugs such as auth-login-cover.html to auth-login-cover
+        if (str_ends_with($slug, '.html')) {
+            $slug = substr($slug, 0, -5);
+        }
+
         // Optional: protect system routes
-        if (in_array($slug, ['login', 'register', 'admin', 'api'])) {
+        if (in_array($slug, ['admin', 'api'])) {
             abort(404);
         }
 

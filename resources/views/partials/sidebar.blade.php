@@ -587,13 +587,8 @@
                   </a>
                   <ul class="menu-sub">
                     <li class="menu-item">
-                      <a href="auth-login-basic.html" class="menu-link" target="_blank">
-                        <div data-i18n="Basic">Basic</div>
-                      </a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="auth-login-cover.html" class="menu-link" target="_blank">
-                        <div data-i18n="Cover">Cover</div>
+                      <a href="{{ route('login') }}" class="menu-link">
+                        <div data-i18n="Login">Login</div>
                       </a>
                     </li>
                   </ul>
@@ -604,18 +599,8 @@
                   </a>
                   <ul class="menu-sub">
                     <li class="menu-item">
-                      <a href="auth-register-basic.html" class="menu-link" target="_blank">
-                        <div data-i18n="Basic">Basic</div>
-                      </a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="auth-register-cover.html" class="menu-link" target="_blank">
-                        <div data-i18n="Cover">Cover</div>
-                      </a>
-                    </li>
-                    <li class="menu-item">
-                      <a href="auth-register-multisteps.html" class="menu-link" target="_blank">
-                        <div data-i18n="Multi-steps">Multi-steps</div>
+                      <a href="{{ route('register') }}" class="menu-link">
+                        <div data-i18n="Register">Register</div>
                       </a>
                     </li>
                   </ul>

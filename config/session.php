@@ -27,14 +27,24 @@ return [
     |
     | Here you may specify the number of minutes that you wish the session
     | to be allowed to remain idle before it expires. If you want them
-    | to expire immediately when the browser is closed then you may
-    | indicate that via the expire_on_close configuration option.
+    | to immediately expire when the browser is closed then you may
+    | indicate that here.
     |
     */
 
-    'lifetime' => (int) env('SESSION_LIFETIME', 120),
+    'lifetime' => (int) env('SESSION_LIFETIME', 30),
 
-    'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false),
+    /*
+    |--------------------------------------------------------------------------
+    | Session Expiration on Browser Close
+    |--------------------------------------------------------------------------
+    |
+    | This option determines if the session should expire when the browser
+    | is closed. Setting to true enhances security.
+    |
+    */
+
+    'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -47,7 +57,7 @@ return [
     |
     */
 
-    'encrypt' => env('SESSION_ENCRYPT', false),
+    'encrypt' => env('SESSION_ENCRYPT', true),
 
     /*
     |--------------------------------------------------------------------------

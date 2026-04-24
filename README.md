@@ -1,14 +1,7 @@
 
-
-**Project for TTunikit**
-
-A modern, responsive Admin Dashboard built with **Laravel** and **Vuexy** Premium Theme.
-
----
-
 ##  Project Overview
 
-This project is a full-featured admin panel developed forTTunikit
+This project is a full-featured Login  developed for TTunikit
 
 ---
 
@@ -52,24 +45,6 @@ This project is a full-featured admin panel developed forTTunikit
    git clone https://github.com/Rowan-Tec/TTunikit.git
    cd TTunikit
 
-Install PHP DependenciesBashcomposer install
-Install Frontend DependenciesBashnpm install --legacy-peer-deps
-Environment SetupBashcp .env.example .env
-php artisan key:generate
-Database Setup
-Open http://localhost/phpmyadmin
-Create new database: Ttunikit_db
-Update .env file:envDB_DATABASE=Ttunikit_db
-DB_USERNAME=root
-DB_PASSWORD=
-
-Run MigrationsBashphp artisan migrate
-Compile AssetsBashnpm run dev
-Start the Project
-Start XAMPP (Apache + MySQL)
-Visit: http://localhost/TTunikit/public
-
-
 
 Project Structure
 Bashmy-vuexy-project/
@@ -86,15 +61,7 @@ Bashmy-vuexy-project/
 ├── storage/            # Logs, cache, uploads
 └── tests/              # Test files
 
- Coding & Contribution Guidelines (Must Follow)
 
-Always pull latest code before starting work:Bashgit pull origin main
-Create a new branch for every task:Bashgit checkout -b feature/your-task-name
-Write clear commit messages.
-After finishing your task:Bashgit add .
-git commit -m "Add feature: description"
-git push origin feature/your-task-name
-Create a Pull Request on GitHub for review.
 
 
 

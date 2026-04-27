@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vuexy | Complete Registration - Admin Dashboard</title>
+    <title>Vuexy</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -535,7 +535,7 @@
                 <div class="form-options">
                     <div class="checkbox-group">
                         <input type="checkbox" id="terms" name="terms" required>
-                        <label for="terms">I agree to the <a href="#" style="color: var(--primary);">Terms & Privacy</a></label>
+                        <label for="terms">I agree to the <a href="#" style="color: var(--primary);">Terms of Service</a></label>
                     </div>
                 </div>
 
@@ -701,7 +701,7 @@
                 return;
             }
             if (!terms) {
-                showMessage('You must agree to the Terms & Privacy policy', 'error');
+                showMessage('You must agree to the Terms of Service', 'error');
                 return;
             }
 

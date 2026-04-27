@@ -1,8 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Profile') }}
+            </h2>
+            <a href="{{ route('login-activity.index') }}" class="text-sm text-indigo-600 hover:text-indigo-900 font-medium">
+                <i class="fas fa-history mr-2"></i>{{ __('Login Activity') }}
+            </a>
+        </div>
     </x-slot>
 
     <div class="py-12">

@@ -17,11 +17,13 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->web(append: [
             \App\Http\Middleware\ForceHttps::class,
+            // \App\Http\Middleware\SecurityMiddleware::class, // Temporarily disabled for login testing
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':60,1',
         ]);
 
         $middleware->api(append: [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            // \App\Http\Middleware\SecurityMiddleware::class, // Temporarily disabled for login testing
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ]);

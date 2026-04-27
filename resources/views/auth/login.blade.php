@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vuexy | Admin Dashboard Login</title>
+    <title>Vuexy| Login</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- Google Identity Services SDK -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <meta name="redirect-url" content="{{ route('dashboard') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -465,7 +464,7 @@
 
             <!-- Session Status -->
             @if (session('status'))
-            <div class="form-message show success" role="alert">
+            <div id="formMessage" class="form-message show success" role="alert" aria-live="polite">
                 <i class="fas fa-circle-check"></i>
                 <span>{{ session('status') }}</span>
             </div>
@@ -473,7 +472,7 @@
 
             <!-- Validation Errors -->
             @if ($errors->any())
-            <div class="form-message show error" role="alert">
+            <div id="formMessage" class="form-message show error" role="alert" aria-live="polite">
                 <i class="fas fa-circle-exclamation"></i>
                 <span>{{ $errors->first() }}</span>
             </div>
@@ -497,6 +496,7 @@
                             value="{{ old('email') }}"
                             autocomplete="email"
                             required
+                            aria-describedby="email-help"
                         >
                         <i class="fas fa-envelope input-icon"></i>
                     </div>
@@ -516,6 +516,7 @@
                             autocomplete="current-password"
                             required
                             minlength="8"
+                            aria-describedby="password-help"
                         >
                         <i class="fas fa-lock input-icon"></i>
                     </div>
@@ -528,7 +529,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn-submit" id="submitBtn">
+                <button type="submit" class="btn-submit" id="submitBtn" aria-describedby="formMessage">
                     <span class="btn-text">Sign In to Vuexy</span>
                     <span class="spinner"></span>
                 </button>
@@ -544,10 +545,10 @@
             <footer class="card-footer">
                 <p>Don't have a Vuexy account? <a href="{{ route('register') }}">Sign Up</a></p>
                 <div class="compliance-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Security</a>
-                    <a href="#">Help Center</a>
+                    <a href="{{ url('/privacy') }}">Privacy Policy</a>
+                    <a href="{{ url('/terms') }}">Terms of Service</a>
+                    <a href="{{ url('/security') }}">Security</a>
+                    <a href="{{ url('/help') }}">Help Center</a>
                 </div>
             </footer>
         </main>
@@ -591,25 +592,53 @@
                 
                 const data = await response.json();
                 
-                if (response.ok) {
+                // Validate response structure before accessing properties
+                if (!response.ok) {
+                    if (data && typeof data === 'object') {
+                        if (data.errors && typeof data.errors === 'object') {
+                            const firstError = Object.values(data.errors)[0];
+                            if (Array.isArray(firstError) && firstError.length > 0) {
+                                showMessage(firstError[0], 'error');
+                            } else {
+                                showMessage('Validation error occurred.', 'error');
+                            }
+                        } else if (data.message && typeof data.message === 'string') {
+                            showMessage(data.message, 'error');
+                        } else {
+                            showMessage('Invalid credentials.', 'error');
+                        }
+                    } else {
+                        showMessage('Server error occurred.', 'error');
+                    }
+                    btn.classList.remove('loading');
+                    btn.disabled = false;
+                    return;
+                }
+                
+                // Success case - validate response structure
+                if (data && typeof data === 'object') {
                     showMessage('✅ Welcome back! Redirecting...', 'success');
                     setTimeout(() => {
-                        window.location.href = data.redirect || '/dashboard';
+                        window.location.href = data.redirect || document.querySelector('meta[name="redirect-url"]')?.content || '/dashboard';
                     }, 1200);
                 } else {
-                    if (data.errors) {
-                        const firstError = Object.values(data.errors)[0][0];
-                        showMessage(firstError, 'error');
-                    } else {
-                        showMessage(data.message || 'Invalid credentials', 'error');
-                    }
+                    showMessage('Login successful but invalid response format.', 'error');
                     btn.classList.remove('loading');
                     btn.disabled = false;
                 }
                 
             } catch (error) {
                 console.error('Login error:', error);
-                showMessage('An unexpected error occurred. Please try again.', 'error');
+                
+                // Handle different types of errors
+                if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                    showMessage('Network error. Please check your internet connection.', 'error');
+                } else if (error.name === 'SyntaxError') {
+                    showMessage('Server response error. Please try again.', 'error');
+                } else {
+                    showMessage('An unexpected error occurred. Please try again.', 'error');
+                }
+                
                 btn.classList.remove('loading');
                 btn.disabled = false;
             }

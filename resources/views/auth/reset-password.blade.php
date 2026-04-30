@@ -114,6 +114,22 @@
             font-size: 0.95rem;
         }
 
+        .login-header-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 24px rgba(0, 102, 204, 0.15);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
         .form-group { margin-bottom: 1.4rem; }
 
         .form-label {
@@ -248,6 +264,87 @@
         }
         .form-message i { font-size: 1.1rem; }
 
+        /* Enhanced select dropdown styling for visibility */
+        .form-input {
+            background: var(--bg-surface);
+            color: var(--text-primary);
+            border-color: var(--border-color);
+        }
+
+        .form-input:focus {
+            border-color: var(--primary);
+            background: var(--bg-surface);
+        }
+
+        /* Light mode select styling */
+        select.form-input {
+            background: white;
+            color: #333;
+            border-color: #ddd;
+        }
+
+        select.form-input:focus {
+            border-color: var(--primary);
+            background: white;
+        }
+
+        select.form-input option {
+            background: white;
+            color: #333;
+        }
+
+        select.form-input option:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Dark mode input field styling */
+        [data-theme="dark"] .form-input {
+            background: var(--bg-surface) !important;
+            color: var(--text-primary) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        [data-theme="dark"] .form-input:focus {
+            border-color: var(--primary) !important;
+            background: var(--bg-surface) !important;
+        }
+
+        [data-theme="dark"] .form-label {
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Dark mode for all select dropdowns */
+        [data-theme="dark"] select.form-input {
+            background: var(--bg-surface) !important;
+            color: var(--text-primary) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        [data-theme="dark"] select.form-input:focus {
+            border-color: var(--primary) !important;
+            background: var(--bg-surface) !important;
+        }
+
+        [data-theme="dark"] select.form-input option {
+            background: var(--bg-surface) !important;
+            color: var(--text-primary) !important;
+        }
+
+        [data-theme="dark"] select.form-input option:hover {
+            background: var(--primary) !important;
+            color: white !important;
+        }
+
+        [data-theme="dark"] select.form-input option:checked {
+            background: var(--primary) !important;
+            color: white !important;
+        }
+
         @media (max-width: 520px) {
             .login-card { padding: 2rem 1.75rem; }
         }
@@ -260,12 +357,14 @@
                 <div class="brand-logo-icon">
                     <i class="fas fa-shield-halved"></i>
                 </div>
-                <div class="brand-name">Vuexy</div>
+                <div class="brand-name" style="color: #000000; font-weight: 700;">TIRELO CAPITAL</div>
             </div>
 
             <div class="card-header">
-                <h1>Reset Password</h1>
-                <p>Enter your new password below</p>
+                <img src="{{ asset('image.png') }}" 
+                     alt="TIRELO CAPITAL Reset Password" 
+                     class="login-header-image">
+                <p style="color: #000000; font-weight: 600;">Enter your new password below</p>
             </div>
 
             <!-- Session Status -->

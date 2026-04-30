@@ -46,8 +46,9 @@ class AuthenticatedSessionController extends Controller
         try {
             Mail::to($user->email)->queue(new LoginNotificationEmail($user, $loginActivity));
         } catch (\Exception $e) {
-            // Log error but don't fail the login
-            \Log::error('Failed to send login notification email: ' . $e->getMessage());
+            // Log without exposing email or error details
+            \Log::error('Login notification failed at ' . now()->format('Y-m-d H:i:s'));
+            // Continue with login - email failure shouldn't block user
         }
 
         // Return JSON if requested via AJAX

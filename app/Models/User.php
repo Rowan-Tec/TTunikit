@@ -45,6 +45,13 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token',
+        'account_deletion_requested_at',
+        'account_deletion_reason',
+        'account_deletion_token',
+        'billing_address',
+        'cellphone',
+        'date_of_birth',
+        'gender',
     ];
 
     /**
@@ -66,5 +73,22 @@ class User extends Authenticatable implements MustVerifyEmail
     public function loginActivities()
     {
         return $this->hasMany(LoginActivity::class);
+    }
+
+    /**
+     * Send the email verification notification.
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new \App\Notifications\VerifyEmail());
+    }
+
+    /**
+     * Mark the email as verified.
+     */
+    public function markEmailAsVerified()
+    {
+        $this->email_verified_at = now();
+        $this->save();
     }
 }

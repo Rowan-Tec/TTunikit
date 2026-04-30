@@ -9,32 +9,52 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #696cff;
-            --primary-dark: #5558e6;
-            --primary-light: #8a8dff;
-            --secondary: #3e4a62;
-            --accent: #696cff;
-            --text-primary: #2e3d52;
-            --text-secondary: #5a6a85;
-            --text-muted: #8a99af;
+            /* Light mode colors */
+            --primary: #0066cc;
+            --primary-dark: #0052a3;
+            --primary-light: #1a75ff;
+            --secondary: #000000;
+            --accent: #0066cc;
+            --text-primary: #000000;
+            --text-secondary: #333333;
+            --text-muted: #666666;
             --bg-surface: #ffffff;
-            --bg-subtle: #f8f9fc;
-            --border-color: #e4e6ef;
+            --bg-subtle: #ffffff;
+            --border-color: #cccccc;
+            --card-bg: #ffffff;
             --success: #71dd37;
             --error: #ff3e1d;
             --warning: #ffab00;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-            --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
-            --shadow-lg: 0 12px 32px rgba(105, 108, 255, 0.15);
+            --shadow-lg: 0 12px 32px rgba(0, 102, 204, 0.15);
             --radius: 12px;
             --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            /* Dark mode colors */
+            --primary: #4d94ff;
+            --primary-dark: #1a75ff;
+            --primary-light: #66a3ff;
+            --secondary: #ffffff;
+            --accent: #4d94ff;
+            --text-primary: #ffffff;
+            --text-secondary: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --bg-surface: #1a1a1a;
+            --bg-subtle: #2d2d2d;
+            --border-color: #404040;
+            --card-bg: #2d2d2d;
+            --success: #32d74b;
+            --error: #ff453a;
+            --warning: #ff9f0a;
+            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Public Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: linear-gradient(135deg, #f5f7ff 0%, #e8ecff 100%);
+            background: var(--bg-surface);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -42,6 +62,27 @@
             padding: 20px;
             color: var(--text-primary);
             line-height: 1.6;
+            transition: var(--transition);
+        }
+
+        .back-to-home {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+            margin-top: 1rem;
+        }
+
+        .back-to-home:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        .back-to-home i {
+            font-size: 12px;
         }
 
         .login-container { width: 100%; max-width: 480px; }
@@ -87,6 +128,22 @@
             animation: shimmer 3s infinite;
         }
 
+        .login-header-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 24px rgba(0, 102, 204, 0.15);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
         @keyframes shimmer {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -114,7 +171,7 @@
             border-radius: var(--radius);
             box-shadow: var(--shadow-lg);
             padding: 2.5rem;
-            border: 1px solid var(--border-color);
+            border: 3px solid var(--border-color);
             position: relative;
             overflow: hidden;
         }
@@ -208,7 +265,6 @@
 
         .form-input:focus + .input-icon,
         .form-input:not(:placeholder-shown) + .input-icon {
-            color: var(--primary);
         }
 
         .form-input::placeholder { color: var(--text-muted); opacity: 0.8; }
@@ -216,6 +272,68 @@
         .form-input.error {
             border-color: var(--error);
             box-shadow: 0 0 0 4px rgba(255, 62, 29, 0.1);
+        }
+        
+        /* Field error highlighting */
+        .field-error {
+            border-color: #dc3545 !important;
+            background-color: #fff5f5 !important;
+            box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25) !important;
+        }
+        
+        .field-error:focus {
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.3) !important;
+        }
+        
+        .input-wrapper.field-error {
+            position: relative;
+        }
+        
+        .input-wrapper.field-error::after {
+            content: '!';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #dc3545;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 1;
+        }
+        
+        /* Field error message styling */
+        .field-error-message {
+            display: block;
+            margin-top: 0.25rem;
+            font-size: 0.75rem;
+            color: #dc3545;
+            font-weight: 500;
+            line-height: 1.4;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .field-error-message:before {
+            content: '';
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-bottom: 4px solid #dc3545;
+            margin-right: 0.25rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .form-options {
@@ -443,6 +561,87 @@
             }
         }
 
+        /* Enhanced select dropdown styling for visibility */
+        .form-input {
+            background: var(--bg-surface);
+            color: var(--text-primary);
+            border-color: var(--border-color);
+        }
+
+        .form-input:focus {
+            border-color: var(--primary);
+            background: var(--bg-surface);
+        }
+
+        /* Light mode select styling */
+        select.form-input {
+            background: white;
+            color: #333;
+            border-color: #ddd;
+        }
+
+        select.form-input:focus {
+            border-color: var(--primary);
+            background: white;
+        }
+
+        select.form-input option {
+            background: white;
+            color: #333;
+        }
+
+        select.form-input option:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Dark mode input field styling */
+        [data-theme="dark"] .form-input {
+            background: var(--bg-surface) !important;
+            color: var(--text-primary) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        [data-theme="dark"] .form-input:focus {
+            border-color: var(--primary) !important;
+            background: var(--bg-surface) !important;
+        }
+
+        [data-theme="dark"] .form-label {
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Dark mode for all select dropdowns */
+        [data-theme="dark"] select.form-input {
+            background: var(--bg-surface) !important;
+            color: var(--text-primary) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        [data-theme="dark"] select.form-input:focus {
+            border-color: var(--primary) !important;
+            background: var(--bg-surface) !important;
+        }
+
+        [data-theme="dark"] select.form-input option {
+            background: var(--bg-surface) !important;
+            color: var(--text-primary) !important;
+        }
+
+        [data-theme="dark"] select.form-input option:hover {
+            background: var(--primary) !important;
+            color: white !important;
+        }
+
+        [data-theme="dark"] select.form-input option:checked {
+            background: var(--primary) !important;
+            color: white !important;
+        }
+
         .sr-only {
             position: absolute;
             width: 1px; height: 1px;
@@ -458,8 +657,10 @@
     <div class="login-container">
         <main class="login-card">
             <div class="card-header">
-                <h1>Welcome to Vuexy!</h1>
-                <p>Sign in to access your admin panel & analytics</p>
+                <img src="{{ asset('image.png') }}" 
+                     alt="TIRELO CAPITAL Login" 
+                     class="login-header-image">
+                <p style="color: #000000; font-weight: 600;">Sign in to access your admin panel & analytics</p>
             </div>
 
             <!-- Session Status -->
@@ -533,6 +734,13 @@
                     <span class="btn-text">Sign In to Vuexy</span>
                     <span class="spinner"></span>
                 </button>
+                
+                <div style="text-align: center;">
+                    <a href="{{ route('home') }}" class="back-to-home">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Home
+                    </a>
+                </div>
             </form>
 
             <!-- Security Badge -->
@@ -568,8 +776,29 @@
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
             
-            if (!email || !password) {
-                showMessage('Please enter both email and password', 'error');
+            // Validation checks - highlight specific fields
+            let hasError = false;
+            
+            if (!email) {
+                const field = document.getElementById('email');
+                field.classList.add('field-error');
+                const wrapper = field.closest('.input-wrapper');
+                if (wrapper) wrapper.classList.add('field-error');
+                showFieldError(field, 'email', 'Email address is required');
+                hasError = true;
+            }
+            
+            if (!password) {
+                const field = document.getElementById('password');
+                field.classList.add('field-error');
+                const wrapper = field.closest('.input-wrapper');
+                if (wrapper) wrapper.classList.add('field-error');
+                showFieldError(field, 'password', 'Password is required');
+                hasError = true;
+            }
+            
+            // If there are any validation errors, stop submission
+            if (hasError) {
                 return;
             }
             
@@ -675,6 +904,57 @@
                 this.classList.remove('error');
             }
         });
+        
+        // Function to show error message under field
+        function showFieldError(field, fieldName, message) {
+            // Remove existing error message
+            hideFieldError(field, fieldName);
+            
+            // Create error message element
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'field-error-message';
+            errorDiv.textContent = message;
+            errorDiv.id = `error-${fieldName}`;
+            
+            // Insert after the field wrapper
+            const wrapper = field.closest('.input-wrapper');
+            if (wrapper) {
+                wrapper.parentNode.insertBefore(errorDiv, wrapper.nextSibling);
+            }
+        }
+        
+        // Function to hide error message under field
+        function hideFieldError(field, fieldName) {
+            const errorDiv = document.getElementById(`error-${fieldName}`);
+            if (errorDiv) {
+                errorDiv.remove();
+            }
+        }
+        
+        // Auto-remove error class on input for better UX
+        const inputs = document.querySelectorAll('.form-input');
+        inputs.forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('field-error');
+                const wrapper = this.closest('.input-wrapper');
+                if (wrapper) {
+                    wrapper.classList.remove('field-error');
+                }
+                // Hide error message
+                hideFieldError(this, this.name);
+            });
+        });
+
+        // Apply theme from home page if available
+        function applyThemeFromHome() {
+            const theme = sessionStorage.getItem('theme') || localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+            // Clear sessionStorage to avoid conflicts
+            sessionStorage.removeItem('theme');
+        }
+
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', applyThemeFromHome);
     </script>
 </body>
 </html>

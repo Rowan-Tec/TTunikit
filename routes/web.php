@@ -10,12 +10,12 @@ use App\Http\Controllers\Pages;
 
 
 Route::get('/', function () {
-    return redirect()->route('login');
-});
+    return view('home');
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware('auth')->name('dashboard');
 
 require __DIR__.'/auth.php';
 

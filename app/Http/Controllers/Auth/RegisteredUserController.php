@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\PendingRegistration;
 use App\Models\LoginActivity;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,6 +18,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use App\Mail\WelcomeEmail;
+use App\Mail\VerifyRegistrationEmail;
 
 class RegisteredUserController extends Controller
 {
@@ -30,65 +31,110 @@ class RegisteredUserController extends Controller
     }
 
     /**
+     * Sanitize input data to prevent XSS and injection attacks
+     */
+    private function sanitizeInput(array $input): array
+    {
+        return [
+            'full_names' => strip_tags(trim($input['full_names'])),
+            'surname' => strip_tags(trim($input['surname'])),
+            'email' => strtolower(filter_var($input['email'], FILTER_SANITIZE_EMAIL)),
+            'cellphone' => preg_replace('/[^0-9+\-()\s]/', '', $input['cellphone']),
+            'gender' => $input['gender'],
+            'date_of_birth' => $input['date_of_birth'],
+            'terms' => $input['terms'] ?? false,
+        ];
+    }
+
+    /**
      * Handle an incoming registration request.
      *
      * @throws ValidationException
      */
-    public function store(Request $request): RedirectResponse|JsonResponse
+    public function store(Request $request): RedirectResponse|\Illuminate\Http\JsonResponse
     {
         $request->validate([
             'full_names' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class, 'unique:pending_registrations'],
             'cellphone' => ['required', 'string', 'max:20', 'regex:/^[+]?[0-9\s\-\(\)]+$/'],
             'gender' => 'required|in:male,female,non-binary,prefer-not-say',
-            'date_of_birth' => ['required', 'date', 'before:today', 'after:-120 years'],
-            'password' => ['required', 'confirmed', \Illuminate\Validation\Rules\Password::defaults()],
+            'date_of_birth' => ['required', 'string', 'date_format:Y-m-d'],
+            'password' => [
+                'required',
+                'string',
+                'min:12',
+                'regex:/[a-z]/',
+                'regex:/[A-Z]/',
+                'regex:/[0-9]/',
+                'regex:/[@$!%*#?&]/',
+                \Illuminate\Validation\Rules\Password::defaults(),
+            ],
             'terms' => ['required', 'accepted'],
+        ], [
+            'password.regex' => 'Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character (@$!%*#?&)',
+            'password.min' => 'Password must be at least 12 characters long',
         ]);
 
-        // Generate unique username automatically
-        $username = $this->generateUniqueUsername($request->full_names, $request->surname);
-
-        $user = User::create([
-            'name' => $request->full_names . ' ' . $request->surname,
-            'email' => $request->email,
-            'username' => $username,
-            'password' => Hash::make($request->password),
-            'full_names' => $request->full_names,
-            'surname' => $request->surname,
-            'cellphone' => $request->cellphone,
-            'gender' => $request->gender,
-            'date_of_birth' => $request->date_of_birth,
-            'role' => 'customer', // Default role for new registrations
-            'email_verified_at' => null, // Will be verified via email
-        ]);
-
-        // Fire registration event (this will handle email verification)
-        event(new Registered($user));
-
-        // Send welcome email
         try {
-            Mail::to($user->email)->queue(new WelcomeEmail($user));
+            // Clean up expired registrations first
+            PendingRegistration::cleanupExpired();
+
+            // Sanitize input data
+            $sanitizedData = $this->sanitizeInput($request->all());
+
+            // Generate unique username automatically
+            $username = $this->generateUniqueUsername($sanitizedData['full_names'], $sanitizedData['surname']);
+
+            // Create pending registration (NOT in users table)
+            $pendingRegistration = PendingRegistration::createPending([
+                'full_names' => $sanitizedData['full_names'],
+                'surname' => $sanitizedData['surname'],
+                'email' => $sanitizedData['email'],
+                'username' => $username,
+                'password' => Hash::make($request->password), // Never sanitize password
+                'cellphone' => $sanitizedData['cellphone'],
+                'gender' => $sanitizedData['gender'],
+                'date_of_birth' => $sanitizedData['date_of_birth'],
+            ]);
+
         } catch (\Exception $e) {
-            Log::error('Failed to send welcome email: ' . $e->getMessage());
+            // Log error without exposing sensitive data
+            Log::error('Registration failed at ' . now()->format('Y-m-d H:i:s'));
+            
+            // Generic error message - no data leakage
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'message' => 'Registration temporarily unavailable. Please try again later.',
+                    'status' => 'error',
+                ], 500);
+            }
+            
+            return redirect()->route('register')
+                ->with('error', 'Registration temporarily unavailable. Please try again later.');
         }
 
-        // Log registration activity for security
-        $this->logRegistrationActivity($request, $user);
+        // Send verification email with token
+        try {
+            Mail::to($request->email)->queue(new VerifyRegistrationEmail($pendingRegistration));
+        } catch (\Exception $e) {
+            // Log without exposing email or error details
+            Log::error('Email notification failed at ' . now()->format('Y-m-d H:i:s'));
+            // Continue with registration - email failure shouldn't block user
+        }
 
         // Don't auto-login until email is verified
-        // Auth::login($user);
+        // User data is stored in pending_registrations table until verification
 
         if ($request->wantsJson()) {
             return response()->json([
                 'message' => 'Registration successful! Please check your email to verify your account.',
-                'redirect' => route('verification.notice'),
+                'redirect' => route('verification.verification.notice'),
                 'requires_verification' => true,
             ]);
         }
 
-        return redirect()->route('verification.notice')
+        return redirect()->route('verification.verification.notice')
             ->with('status', 'Registration successful! Please check your email to verify your account.');
     }
 
@@ -101,7 +147,7 @@ class RegisteredUserController extends Controller
         $username = $baseUsername;
         $counter = 1;
 
-        while (User::where('username', $username)->exists()) {
+        while (User::where('username', $username)->exists() || PendingRegistration::where('username', $username)->exists()) {
             $username = $baseUsername . $counter;
             $counter++;
         }

@@ -535,14 +535,62 @@
                 font-size: 1.9rem;
             }
         }
+
+        .home-logo-image {
+            width: 120px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            background: #000000;
+            border: 2px solid #333333;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+            padding: 8px;
+        }
+
+        [data-theme="light"] .home-logo-image {
+            background: #000000 !important;
+            border: 2px solid #333333 !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        [data-theme="dark"] .home-logo-image {
+            background: #1f2937 !important;
+            border: 2px solid #374151 !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .header-logo-image {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+            background: #000000;
+            border: 2px solid #333333;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            margin: 80px auto 0 auto;
+            display: block;
+        }
+
+        [data-theme="light"] .header-logo-image {
+            background: #000000 !important;
+            border: 2px solid #333333 !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        [data-theme="dark"] .header-logo-image {
+            background: #1f2937 !important;
+            border: 2px solid #374151 !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+        }
     </style>
 </head>
 <body>
     <!-- Fixed top bar with clean toggle + sign in/register -->
     <div class="top-bar">
         <div class="logo-group">
-            <div class="logo-icon">VX</div>
-            <span class="brand-name">Vuexy</span>
+            <img src="{{ asset('TTwebbrand.png') }}" alt="TIRELO CAPITAL" class="home-logo-image">
         </div>
         <div class="action-buttons">
             <a href="#" id="signinNavBtn" class="btn-nav">
@@ -562,9 +610,7 @@
     <!-- Main content block -->
     <div class="container">
         <div class="header">
-            <span class="subtitle">next‑gen user management</span>
-            <h1 class="main-title">Welcome to Vuexy</h1>
-            <p style="color: var(--text-secondary); max-width: 520px; margin: 0.8rem auto 0;">Simple, powerful, and secure platform for modern teams.</p>
+            <img src="{{ asset('TTwebbrand.png') }}" alt="TIRELO CAPITAL" class="header-logo-image">
         </div>
         <!-- Hero section with product image only -->
     <div class="hero-section">

@@ -115,13 +115,36 @@
         }
 
         .login-header-image {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 20px;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 8px 24px rgba(0, 102, 204, 0.15);
-            animation: float 3s ease-in-out infinite;
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            margin: 0 auto 1.5rem auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            display: block;
+            text-align: center;
+            background: #000000;
+            padding: 10px;
+        }
+
+        /* Light mode specific styling */
+        [data-theme="light"] .login-header-image {
+            background: #000000 !important;
+            border: 2px solid #333333 !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        /* Dark mode specific styling */
+        [data-theme="dark"] .login-header-image {
+            background: #1f2937;
+            border: 2px solid #374151;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header {
+            text-align: center;
         }
 
         @keyframes float {
@@ -423,7 +446,7 @@
             </div>
 
             <div class="card-header">
-                <img src="{{ asset('image.png') }}" 
+                <img src="{{ asset('TTwebbrand.png') }}" 
                      alt="TIRELO CAPITAL Forgot Password" 
                      class="login-header-image">
                 <p style="color: #000000; font-weight: 600;">Enter your email and we'll send you a reset link</p>

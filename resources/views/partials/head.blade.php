@@ -1,3 +1,66 @@
+<style>
+/* Combined sticky top header*/
+.top-header {
+  position: sticky;
+  top: 0;
+  z-index: 1080; /* higher than content, lower than modals */
+  background: var(--bs-body-bg);
+}
+
+/* Horizontal menu hover*/
+.horizontal-menu {
+  display: flex;
+  gap: 1.25rem;
+}
+
+/* Menu item container */
+.horizontal-menu .menu-item {
+  position: relative;
+}
+
+/* Top‑level menu link */
+.horizontal-menu .menu-link {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--bs-body-color);
+  text-decoration: none;
+}
+
+/* Dropdown container */
+.horizontal-menu .menu-sub {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 240px;
+  background: var(--bs-body-bg);
+  border-radius: 0.375rem;
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
+  z-index: 1085;
+}
+
+/* Hover behavior */
+.horizontal-menu .menu-item:hover > .menu-sub {
+  display: block;
+}
+
+/* Dropdown items */
+.horizontal-menu .menu-sub a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--bs-body-color);
+  text-decoration: none;
+}
+
+.horizontal-menu .menu-sub a:hover {
+  background: var(--bs-secondary-bg);
+}
+
+</style>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +82,8 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

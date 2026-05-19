@@ -1,12 +1,12 @@
 <!doctype html>
 <html
   lang="en"
-  class="layout-navbar-fixed layout-menu-fixed layout-compact"
+  class="layout-menu-fixed layout-menu-collapsed"
   dir="ltr"
   data-skin="default"
   data-assets-path="../../assets/"
   data-template="vertical-menu-template"
-  data-bs-theme="light">
+  data-bs-theme="dark">
 
 @include('partials.head')
 
@@ -20,8 +20,7 @@
 
     <div class="layout-page">
 
-      <!-- Navbar -->
-      @include('partials.navbar')
+     @include('partials.top-header')
 
       <!-- Content -->
       <div class="content-wrapper">

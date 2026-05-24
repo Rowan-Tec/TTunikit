@@ -69,7 +69,7 @@
                 </li> -->
                 <!-- / Style Switcher-->
                                                        <li>
-              <a href="#" class="btn btn-primary waves-effect waves-light" target="_blank"><span class="tf-icons icon-base ti tabler-login scaleX-n1-rtl me-md-1"></span><span class="d-none d-md-block">Login/Register</span></a>
+              <a href="{{ route('login') }}" class="btn btn-primary waves-effect waves-light" target="_blank"><span class="tf-icons icon-base ti tabler-login scaleX-n1-rtl me-md-1"></span><span class="d-none d-md-block">Login/Register</span></a>
             </li>
                                 </ul>
             </div>

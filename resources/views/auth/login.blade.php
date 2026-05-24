@@ -1,47 +1,135 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('layouts.blankLayout')
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+@section('title', 'Login | TT UNIK IT SOLUTIONS')
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+@section('content')
+<div class="container-xxl">
+  <div class="authentication-wrapper authentication-basic container-p-y">
+    <div class="authentication-inner py-6">
+      <div class="card">
+        <div class="card-body">
+          <div class="app-brand justify-content-center mb-6">
+            <a href="{{ url('/') }}" class="app-brand-link">
+              <img src="https://www.ttunikit.co.za/assets/img/branding/TTwebbrand.png" alt="Logo" height="60">
+            </a>
+          </div>
+
+          <h4 class="mb-1 text-center">Welcome back</h4>
+          <p class="mb-6 text-center">Sign in to continue to your account.</p>
+
+          @if (session('status'))
+            <div class="alert alert-success">
+              {{ session('status') }}
+            </div>
+          @endif
+
+          <form id="loginForm" class="mb-6" method="POST" action="{{ route('login') }}">
+            @csrf
+
+            <div class="mb-4">
+              <label for="email" class="form-label">Email<sup class="text-danger">*</sup></label>
+              <input type="email"
+                     class="form-control @error('email') is-invalid @enderror"
+                     id="email"
+                     name="email"
+                     placeholder="Enter your email"
+                     value="{{ old('email') }}"
+                     autocomplete="username"
+                     autofocus>
+              @error('email')
+                <div class="invalid-feedback d-block">{{ $message }}</div>
+              @enderror
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label" for="password">Password<sup class="text-danger">*</sup></label>
+              <div class="input-group input-group-merge">
+                <input type="password"
+                       id="password"
+                       class="form-control @error('password') is-invalid @enderror"
+                       name="password"
+                       placeholder="Enter your password"
+                       autocomplete="current-password">
+                <span class="input-group-text cursor-pointer" id="passwordToggle">
+                  <i class="fa-solid fa-eye-slash"></i>
+                </span>
+              </div>
+              @error('password')
+                <div class="invalid-feedback d-block">{{ $message }}</div>
+              @enderror
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-6">
+              <div class="form-check mb-0">
+                <input class="form-check-input"
+                       type="checkbox"
+                       id="remember_me"
+                       name="remember">
+                <label class="form-check-label" for="remember_me">
+                  Remember me
+                </label>
+              </div>
+
+              @if (Route::has('password.request'))
+                <a href="{{ route('password.request') }}">Forgot password?</a>
+              @endif
+            </div>
+
+            <button type="submit" class="btn btn-primary d-grid w-100 waves-effect waves-light">
+              Sign in
+            </button>
+          </form>
+
+          <p class="text-center">
+            <span>New on our platform?</span>
+            <a href="{{ route('register') }}">
+              <span>Create an account</span>
+            </a>
+          </p>
+
+          <div class="divider my-6">
+            <div class="divider-text">or</div>
+          </div>
+
+          <div class="d-flex justify-content-center">
+            <a href="javascript:;" class="btn btn-icon rounded-circle btn-text-facebook me-2 waves-effect">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+
+            <a href="javascript:;" class="btn btn-icon rounded-circle btn-text-twitter me-2 waves-effect">
+              <i class="fa-brands fa-twitter"></i>
+            </a>
+
+            <a href="javascript:;" class="btn btn-icon rounded-circle btn-text-github me-2 waves-effect">
+              <i class="fa-brands fa-github"></i>
+            </a>
+
+            <a href="javascript:;" class="btn btn-icon rounded-circle btn-text-google waves-effect">
+              <i class="fa-brands fa-google"></i>
+            </a>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggle = document.getElementById('passwordToggle');
+    const input = document.getElementById('password');
+    const icon = toggle ? toggle.querySelector('i') : null;
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+    if (!toggle || !input || !icon) {
+      return;
+    }
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    toggle.addEventListener('click', function () {
+      const isHidden = input.type === 'password';
+      input.type = isHidden ? 'text' : 'password';
+      icon.classList.toggle('fa-eye-slash', !isHidden);
+      icon.classList.toggle('fa-eye', isHidden);
+    });
+  });
+</script>
+@endsection

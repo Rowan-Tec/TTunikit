@@ -1,6 +1,6 @@
 <nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme dropdown-menu" id="layout-navbar" >
           <div class="container-xxl" >
-              <a href="https://www.ttunikit.co.za" class="app-brand-link">
+              <a href="{{ auth()->check() ? route('dashboard') : url('/') }}" class="app-brand-link">
                 <img src="https://www.ttunikit.co.za/assets/img/branding/TTwebbrand.png" alt="Logo" data-app-dark-img="branding/TTwebbrand.png" class="navbar-logo" height="65" style="visibility: visible;">
               </a>
             <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
@@ -68,8 +68,18 @@
                   </ul>
                 </li> -->
                 <!-- / Style Switcher-->
-                                                       <li>
-              <a href="{{ route('login') }}" class="btn btn-primary waves-effect waves-light" target="_blank"><span class="tf-icons icon-base ti tabler-login scaleX-n1-rtl me-md-1"></span><span class="d-none d-md-block">Login/Register</span></a>
+            <li>
+              @auth
+                <a href="{{ route('dashboard') }}" class="btn btn-primary waves-effect waves-light">
+                  <span class="tf-icons icon-base ti tabler-layout-dashboard scaleX-n1-rtl me-md-1"></span>
+                  <span class="d-none d-md-block">Dashboard</span>
+                </a>
+              @else
+                <a href="{{ route('login') }}" class="btn btn-primary waves-effect waves-light">
+                  <span class="tf-icons icon-base ti tabler-login scaleX-n1-rtl me-md-1"></span>
+                  <span class="d-none d-md-block">Login/Register</span>
+                </a>
+              @endauth
             </li>
                                 </ul>
             </div>

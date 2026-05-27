@@ -1,6 +1,6 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu">
           <div class="app-brand demo">
-            <a href="https://www.ttunikit.co.za" class="app-brand-link">
+            <a href="{{ auth()->check() ? route('dashboard') : url('/') }}" class="app-brand-link">
               <span class="app-brand-text demo menu-text fw-bold ms-3"></span>
             </a>
 

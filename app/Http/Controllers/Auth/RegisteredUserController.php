@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
+use App\Notifications\EmailVerificationCode;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -85,6 +85,7 @@ class RegisteredUserController extends Controller
                 'gender' => $validated['gender'],
                 'province' => $validated['province'],
                 'reference_code' => null,
+                'role' => 'customer',
                 'date_of_birth' => $dateOfBirth,
 
                 'email' => $validated['email'],
@@ -102,13 +103,15 @@ class RegisteredUserController extends Controller
             return $user;
         });
 
-
-        event(new Registered($user));
+        $verificationCode = $user->generateEmailVerificationCode();
+        $user->notify(new EmailVerificationCode($verificationCode));
 
         Auth::login($user);
 
         // If email verification is required, block access to dashboard until verified
         if (! $user->hasVerifiedEmail()) {
+            $request->session()->put('verification_resend_available_at', now()->addMinutes(3)->timestamp);
+
             return redirect()->route('verification.notice');
         }
 

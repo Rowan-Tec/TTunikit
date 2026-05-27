@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -27,6 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
     'province',
     'reference_code',
     'date_of_birth',
+    'role',
     'email',
     'password',
 ];
@@ -39,6 +41,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token',
+        'email_verification_code',
     ];
 
     /**
@@ -50,7 +53,38 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return [
             'email_verified_at' => 'datetime',
+            'email_verification_code_expires_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function generateEmailVerificationCode(): string
+    {
+        $code = (string) random_int(100000, 999999);
+
+        $this->forceFill([
+            'email_verification_code' => Hash::make($code),
+            'email_verification_code_expires_at' => now()->addMinutes(15),
+        ])->save();
+
+        return $code;
+    }
+
+    public function clearEmailVerificationCode(): void
+    {
+        $this->forceFill([
+            'email_verification_code' => null,
+            'email_verification_code_expires_at' => null,
+        ])->save();
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isCustomer(): bool
+    {
+        return $this->role === 'customer';
     }
 }

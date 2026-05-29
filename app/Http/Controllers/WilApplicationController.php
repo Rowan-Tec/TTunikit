@@ -61,6 +61,7 @@ class WilApplicationController extends Controller
                 'status'         => 'pending_payment',
             ]
         );
+        
 
         // Store each uploaded document
         $documents = [
@@ -96,6 +97,7 @@ class WilApplicationController extends Controller
         foreach ($admins as $admin) {
         $admin->notify(new ApplicationSubmitted($application));
         }
+
 
         return redirect()->route('payment')
             ->with('success', 'Application submitted! Please proceed to payment.');

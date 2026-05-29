@@ -22,7 +22,7 @@ Route::get('/wil_application',[WilApplicationController::class, 'create'])->name
 Route::post('/wil_application',[WilApplicationController::class, 'store']);
 
 // Student routes
-Route::middleware(['auth', 'student'])->prefix('dashboard')->group(function () {
+Route::middleware(['auth', 'customer'])->prefix('dashboard')->group(function () {
 
   Route::get('/wil_info',[ StudentController::class, 'info'])->name('wil_info');
 

@@ -85,7 +85,7 @@ class RegisteredUserController extends Controller
                 'gender' => $validated['gender'],
                 'province' => $validated['province'],
                 'reference_code' => null,
-                'role' => 'customer',
+                
                 'date_of_birth' => $dateOfBirth,
 
                 'email' => $validated['email'],

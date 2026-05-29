@@ -192,6 +192,29 @@
               </ul>
             </li>
 
+            <!-- Student -->
+            <li class="menu-header small">
+              <span class="menu-header-text" data-i18n="STUDENT">STUDENT</span>
+            </li>
+            <li class="menu-item">
+              <a href="app-email.html" class="menu-link">
+                <i class="menu-icon icon-base ti tabler-headset"></i>
+                <div data-i18n="Remote Support">Remote Support</div>
+              </a>
+            </li>
+             <li class="menu-item">
+              <a href="app-email.html" class="menu-link">
+                <i class="menu-icon icon-base ti tabler-tool"></i>
+                <div data-i18n="Onsite Support">Onsite Support</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="app-chat.html" class="menu-link">
+                <i class="menu-icon icon-base ti tabler-network"></i>
+                <div data-i18n="Networking & Cabling">Networking & Cabling</div>
+              </a>
+            </li>
+
             <!-- Apps & Pages -->
             <li class="menu-header small">
               <span class="menu-header-text" data-i18n="TECHNICAL SUPPORT">TECHNICAL SUPPORT</span>
@@ -223,7 +246,7 @@
               <a href="app-calendar.html" class="menu-link">
                 <i class="menu-icon icon-base ti tabler-device-laptop"></i>
                 <div data-i18n="Screen Replacement">Screen Replacement</div>
-              </a
+              </a>
             </li>
             <li class="menu-item">
               <a href="app-kanban.html" class="menu-link">

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\WilApplicationController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\Pages;
 
@@ -17,17 +18,14 @@ Route::get('/', function () {
 
 // WIL
 
-Route::get('/wil_info', function () {
-    return view('wil_module.student.wil_info');
-})->name('wil_info');
-
-//Route::get('/wil_application',[WilApplicationController::class, 'create'])->name('wil_application');
-//Route::post('/wil_application',[WilApplicationController::class, 'store']);
+Route::get('/wil_application',[WilApplicationController::class, 'create'])->name('wil_application');
+Route::post('/wil_application',[WilApplicationController::class, 'store']);
 
 // Student routes
 Route::middleware(['auth', 'student'])->prefix('dashboard')->group(function () {
 
   Route::get('/wil_info',[StudentController::class,'info'])->name('wil_info');
+
 
 });
 

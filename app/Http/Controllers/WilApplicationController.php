@@ -19,11 +19,11 @@ class WilApplicationController extends Controller
 
         // If already submitted, redirect to dashboard
         if ($application && $application->status !== 'draft') {
-            return redirect()->route('student.dashboard')
+            return redirect()->route('dashboard')
                 ->with('info', 'Your application has already been submitted.');
         }
 
-        return view('student.wil_application', compact('user', 'application'));
+        return view('wil_module.student.wil_application', compact('user', 'application'));
     }
 
     // Handle form submission

@@ -3,7 +3,11 @@
 @section('title', 'Dashboard | TT UNIK IT SOLUTIONS')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
+
+<div id="dashboard-content">
+    <!-- all your existing cards go here -->
+    <!-- welcome card, status cards, progress timeline etc -->
+     <div class="container-xxl flex-grow-1 container-p-y">
   <div class="row g-4 mb-4">
     <div class="col-12">
       <div class="card">
@@ -136,4 +140,8 @@
     </div>
   </div>
 </div>
+
+
+</div>
+
 @endsection

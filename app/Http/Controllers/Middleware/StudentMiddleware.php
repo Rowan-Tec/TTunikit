@@ -13,7 +13,7 @@ class StudentMiddleware
         /** @var \App\Models\User $user */
           $user = Auth::user();
 
-     if (!Auth::check() || !$user->isStudent()) {
+     if (!Auth::check() || !$user->isCustomer()) {
             abort(403, 'Access denied.');
         }
 

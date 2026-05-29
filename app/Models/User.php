@@ -78,6 +78,12 @@ class User extends Authenticatable implements MustVerifyEmail
         ])->save();
     }
 
+     // A user has one WIL application
+    public function wilApplication()
+    {
+        return $this->hasOne(WilApplication::class);
+    }
+
     public function isAdmin(): bool
     {
         return $this->role === 'admin';

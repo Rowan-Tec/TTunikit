@@ -197,7 +197,7 @@
               <span class="menu-header-text" data-i18n="STUDENT">STUDENT</span>
             </li>
             <li class="menu-item">
-              <a href="{{ route('student.wil_application') }}" class="menu-link">
+              <a href="{{ route('wil_info') }}" class="menu-link">
                 <i class="menu-icon icon-base ti tabler-headset"></i>
                 <div data-i18n="WIL APPLICATION">WIL APPLICATION</div>
               </a>

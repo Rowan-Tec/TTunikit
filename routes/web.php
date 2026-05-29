@@ -13,6 +13,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// WIL
+
+Route::get('/wil_info', function () {
+    return view('wil_module.student.wil_info');
+})->name('wil_info');
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

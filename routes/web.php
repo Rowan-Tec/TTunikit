@@ -23,6 +23,13 @@ Route::post('/wil_application',[WilApplicationController::class, 'store']);
 
 Route::get('/payment', [StudentController::class, 'payment'])->name('payment');
 
+Route::delete('/notifications/{id}', function ($id) {
+    $notification = auth()->user()->notifications()->findOrFail($id);
+    $notification->delete();
+
+    return back();
+})->name('notifications.delete');
+
 // Student routes
 Route::middleware(['auth', 'customer'])->prefix('dashboard')->group(function () {
 
@@ -38,7 +45,24 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
         auth()->user()->unreadNotifications->markAsRead();
         return back();
     })->name('admin.notifications.read');
+    Route::get('/application/{id}/document_review',
+     [AdminDashboardController::class, 'review'])->name('document_review');
+     Route::get(
+    '/application/{id}/edit_application',
+    [AdminDashboardController::class, 'edit']
+)->name('edit_application');
+
+    Route::put(
+    '/application/{id}',
+    [AdminDashboardController::class, 'update']
+)->name('update');
+
+Route::delete(
+    '/application/{id}',
+    [AdminDashboardController::class, 'destroy']
+)->name('destroy');
 });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

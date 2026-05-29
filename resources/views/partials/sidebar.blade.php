@@ -201,7 +201,7 @@
                 <i class="menu-icon icon-base ti tabler-headset"></i>
                 <div data-i18n="WIL APPLICATION">WIL APPLICATION</div>
               </a>
-            </li>
+             </li>
              <li class="menu-item">
               <a href="app-email.html" class="menu-link">
                 <i class="menu-icon icon-base ti tabler-tool"></i>

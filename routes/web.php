@@ -23,6 +23,8 @@ Route::post('/wil_application',[WilApplicationController::class, 'store']);
 
 Route::get('/payment', [StudentController::class, 'payment'])->name('payment');
 
+Route::get('/status_track',[StudentController::class, 'status'] )->name('status_track');
+
 Route::delete('/notifications/{id}', function ($id) {
     $notification = auth()->user()->notifications()->findOrFail($id);
     $notification->delete();
@@ -33,6 +35,7 @@ Route::delete('/notifications/{id}', function ($id) {
 // Student routes
 Route::middleware(['auth', 'customer'])->prefix('dashboard')->group(function () {
 
+Route::get('dashboard', [StudentController::class, 'index'])->name('dashboard');
   Route::get('/wil_info',[ StudentController::class, 'info'])->name('wil_info');
 
 

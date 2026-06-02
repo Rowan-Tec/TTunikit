@@ -152,11 +152,18 @@
                   <p class="mb-0"><b>Total Due</b></p>
                   <h6 class="mb-0"><b>R900.00</b></h6>
                 </div>
+
                 <div class="d-grid mt-5">
+                  <a href="{{ route('payment.pay', $application->id) }}"
+                         class="btn btn-success">
+                        Proceed with Payment
+                  </a>
+                  <!--
                   <button class="btn btn-success">
                     <span class="me-2">Proceed with Payment</span>
                     <i class="icon-base ti tabler-arrow-right scaleX-n1-rtl"></i>
                   </button>
+                  -->
                 </div>
 
                 <p class="mt-8">

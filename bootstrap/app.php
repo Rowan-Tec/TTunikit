@@ -16,6 +16,12 @@ return Application::configure(basePath: dirname(__DIR__))
         'customer' => \App\Http\Middleware\CustomerMiddleware::class,
         'student' => \App\Http\Middleware\StudentMiddleware::class,
     ]);
+
+      $middleware->validateCsrfTokens(
+        except: [
+            'payment/notify',
+        ]
+    );
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

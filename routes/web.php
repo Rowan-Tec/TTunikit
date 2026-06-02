@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\WilApplicationController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Pages;
 
 
@@ -20,6 +21,21 @@ Route::get('/', function () {
 
 Route::get('/wil_application',[WilApplicationController::class, 'create'])->name('wil_application');
 Route::post('/wil_application',[WilApplicationController::class, 'store']);
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/payment/{application}', [PaymentController::class, 'pay'])
+        ->name('payment.pay');
+
+    Route::get('/payment/success', [PaymentController::class, 'success'])
+        ->name('payment.success');
+
+    Route::get('/payment/cancel', [PaymentController::class, 'cancel'])
+        ->name('payment.cancel');
+
+    Route::post('/payment/notify', [PaymentController::class, 'notify'])
+        ->name('payment.notify');
+});
 
 Route::get('/payment', [StudentController::class, 'payment'])->name('payment');
 

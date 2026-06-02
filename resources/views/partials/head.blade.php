@@ -115,9 +115,6 @@
     <!-- Config -->
     <script src="{{ asset('assets/js/config.js') }}"></script>
 
-    <!-- tabler-icons -->
-      <link rel="stylesheet" href="assets\@tabler\icons-webfont\dist\tabler-icons.css" />
-
     {{-- Extra page-specific CSS --}}
     @stack('styles')
 </head>

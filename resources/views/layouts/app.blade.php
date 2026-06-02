@@ -54,5 +54,7 @@
 <script src="../../assets/js/main.js"></script>
 <script src="../../assets/js/dashboards-analytics.js"></script>
 
+@vite(['resources/js/app.js'])
+
 </body>
 </html>

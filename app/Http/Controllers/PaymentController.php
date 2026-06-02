@@ -26,7 +26,6 @@ class PaymentController extends Controller
     // Create pending payment record
     $payment = Payment::create([
         'application_id' => $application->id,
-        'method' => 'payfast',
         'status' => 'pending',
         'amount' => 900.00,
     ]);
@@ -81,8 +80,8 @@ class PaymentController extends Controller
     Payment::create([
         'application_id' => $application->id,
         'amount' => $request->amount_gross,
-        'method' => 'PayFast',
-        'status' => 'Paid',
+        'method' => 'payfast',
+        'status' => 'paid',
         'transaction_id' => $request->pf_payment_id,
         'gateway_reference' => $request->payment_status,
         'paid_at' => now(),

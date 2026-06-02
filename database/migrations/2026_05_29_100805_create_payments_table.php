@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('application_id')->constrained('wil_applications')->onDelete('cascade');
 
-            $table->enum('method', ['payfast', 'proof_of_payment'])->default('payfast');;
+            $table->enum('method', ['payfast', 'proof_of_payment'])->default('payfast');
             $table->enum('status', ['pending', 'paid', 'failed'])->default('pending');
             $table->decimal('amount', 8, 2)->default(0.00);
 

@@ -23,6 +23,7 @@
           <th>Course</th>
           <th>Date Submitted</th>
           <th>Status</th>
+          <th>Payment</th>
 
         </tr>
 
@@ -55,6 +56,21 @@
                 </span>
 
             </td>
+            <td>
+    @if($application->payment && $application->payment->status == 'paid')
+
+        <span class="badge bg-success">
+            Paid
+        </span>
+
+    @else
+
+        <span class="badge bg-danger">
+            Unpaid
+        </span>
+
+    @endif
+</td>
 
         </tr>
 

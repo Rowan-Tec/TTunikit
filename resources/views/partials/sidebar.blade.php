@@ -198,20 +198,20 @@
             </li>
             <li class="menu-item">
               <a href="{{ route('wil_info') }}" class="menu-link">
-                <i class="menu-icon icon-base ti tabler-headset"></i>
+                <i class="menu-icon icon-base ti tabler-file-description"></i>
                 <div data-i18n="WIL APPLICATION">WIL APPLICATION</div>
               </a>
              </li>
 
              <li class="menu-item">
               <a href="{{ route('status_track') }}" class="menu-link">
-                <i class="menu-icon icon-base ti tabler-tool"></i>
+                <i class="menu-icon icon-base ti tabler-progress-check"></i>
                 <div data-i18n="STATUS TRACKING">STATUS TRACKING</div>
               </a>
             </li>
             <li class="menu-item">
               <a href="{{ route('payment') }}" class="menu-link">
-                <i class="menu-icon icon-base ti tabler-network"></i>
+                <i class="menu-icon icon-base ti tabler-cash"></i>
                 <div data-i18n="WIL PAYMENT">WIL PAYMENT</div>
               </a>
             </li>

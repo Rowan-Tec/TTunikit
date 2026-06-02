@@ -106,7 +106,7 @@ public function edit($id)
       }
 
     return redirect()
-        ->route('wil_module.admin.dashboard')
+        ->route('admin.dashboard')
         ->with(
             'success',
             'Application updated successfully'

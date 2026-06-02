@@ -32,14 +32,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/payment/cancel', [PaymentController::class, 'cancel'])
         ->name('payment.cancel');
-
-    Route::post('/payment/notify', [PaymentController::class, 'notify'])
-        ->name('payment.notify');
 });
 
-Route::get('/payment', [StudentController::class, 'payment'])->name('payment');
-
-Route::get('/status_track',[StudentController::class, 'status'] )->name('status_track');
+Route::post('/payfast/notify', [PaymentController::class, 'notify'])
+    ->name('payment.notify');
 
 Route::delete('/notifications/{id}', function ($id) {
     $notification = auth()->user()->notifications()->findOrFail($id);
@@ -51,8 +47,11 @@ Route::delete('/notifications/{id}', function ($id) {
 // Student routes
 Route::middleware(['auth', 'customer'])->prefix('dashboard')->group(function () {
 
-Route::get('dashboard', [StudentController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
   Route::get('/wil_info',[ StudentController::class, 'info'])->name('wil_info');
+  Route::get('/payment', [StudentController::class, 'payment'])->name('payment');
+
+Route::get('/status_track',[StudentController::class, 'status'] )->name('status_track');
 
 
 });

@@ -17,9 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
         'student' => \App\Http\Middleware\StudentMiddleware::class,
     ]);
 
-      $middleware->validateCsrfTokens(
+       $middleware->validateCsrfTokens(
         except: [
-            'payment/notify',
+            'payfast/notify',
         ]
     );
     })

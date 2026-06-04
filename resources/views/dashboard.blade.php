@@ -21,7 +21,7 @@
           <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit" class="btn btn-danger waves-effect waves-light">
-              <i class="ti ti-logout me-1"></i>
+              <i class="ti ti-logout me-1" style="background-color: transparent; font-size:25px ; color: #7367F0;"></i>
               Logout
             </button>
           </form>
@@ -37,7 +37,7 @@
           <div class="d-flex align-items-center gap-3">
             <div class="avatar">
               <span class="avatar-initial rounded bg-label-primary">
-                <i class="ti ti-gift"></i>
+                <i class="ti ti-gift" style="background-color: transparent; font-size:20px"></i>
               </span>
             </div>
             <div>
@@ -55,7 +55,7 @@
           <div class="d-flex align-items-center gap-3">
             <div class="avatar">
               <span class="avatar-initial rounded bg-label-success">
-                <i class="ti ti-id-badge"></i>
+                <i class="ti ti-id-badge" style="background-color: transparent"></i>
               </span>
             </div>
             <div>
@@ -73,7 +73,7 @@
           <div class="d-flex align-items-center gap-3">
             <div class="avatar">
               <span class="avatar-initial rounded bg-label-info">
-                <i class="ti ti-mail-check"></i>
+                <i class="ti ti-mail-check" style="background-color: transparent"></i>
               </span>
             </div>
             <div>
@@ -122,17 +122,17 @@
         </div>
         <div class="card-body d-grid gap-3">
           <a href="{{ url('/') }}" class="btn btn-outline-primary waves-effect">
-            <i class="ti ti-home me-1"></i>
+            <i class="ti ti-home me-1" style="background-color: transparent"></i>
             Visit Website
           </a>
           <a href="{{ route('profile.edit') }}" class="btn btn-outline-secondary waves-effect">
-            <i class="ti ti-user-edit me-1"></i>
+            <i class="ti ti-user-edit me-1" style="background-color: transparent"></i>
             Edit Profile
           </a>
           <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit" class="btn btn-outline-danger w-100 waves-effect">
-              <i class="ti ti-logout me-1"></i>
+              <i class="ti ti-logout me-1" style="background-color: transparent"></i>
               Logout
             </button>
           </form>

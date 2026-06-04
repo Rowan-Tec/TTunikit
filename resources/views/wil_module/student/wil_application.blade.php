@@ -5,37 +5,37 @@
 @section('content')
 
 <style>
-    .upload-area {
-        border: 2px dashed #dee2e6;
-        border-radius: 0.5rem;
-        padding: 1.5rem;
-        text-align: center;
-        cursor: pointer;
-        transition: border-color 0.2s, background 0.2s;
-        background: #f8f9fa;
-    }
-    .upload-area:hover { border-color: #185FA5; background: #eef5fc; }
-    .upload-area i { font-size: 30px; color: #185FA5; display: block; margin-bottom: 6px; }
-    .upload-area p { font-size: 13px; color: #6c757d; margin: 0; }
-    .upload-area .link { color: #185FA5; font-weight: 500; }
-    .upload-area small { font-size: 11px; color: #adb5bd; }
-    .file-name { font-size: 12px; color: #185FA5; margin-top: 5px; }
+.upload-area {
+    border: 2px dashed #d9dee3;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
-    /* Selected state */
-    .upload-area.file-selected {
-        border: 2px solid #28a745;
-        background: #f0fff4;
-    }
-    .upload-area.file-selected i {
-        color: #28a745;
-    }
-    .upload-area.file-selected p {
-        color: #28a745;
-    }
-    .upload-area.file-selected small {
-        color: #6c757d;
-    }
+.upload-area:hover {
+    border-color: #696cff;
+    background-color: rgba(105, 108, 255, 0.05);
+}
+
+.upload-area.file-selected {
+    border-color: #71dd37;
+    background-color: rgba(113, 221, 55, 0.1);
+}
+
+.upload-area.file-selected i {
+    color: #71dd37;
+}
+
+.file-name {
+    margin-top: 8px;
+    color: #71dd37;
+    font-weight: 600;
+}
 </style>
+
+<!-- Your page content starts here -->
 
      <!-- Content -->
            
@@ -284,4 +284,31 @@
 
     <!-- Drag Target Area To SlideIn Menu On Small Screens -->
     <div class="drag-target"></div>
+
+    <script>
+function showFileName(input, targetId)
+{
+    const fileNameDiv = document.getElementById(targetId);
+
+    if (input.files.length > 0)
+    {
+        const file = input.files[0];
+
+        fileNameDiv.innerHTML =
+            `<i class="bx bx-check-circle"></i> ${file.name}`;
+
+        const uploadArea = input.previousElementSibling;
+
+        uploadArea.classList.add('file-selected');
+
+        uploadArea.innerHTML = `
+            <i class="bx bx-check-circle fs-1 text-success"></i>
+            <p class="mb-1 fw-bold text-success">
+                File Selected Successfully
+            </p>
+            <small>${file.name}</small>
+        `;
+    }
+}
+</script>
 @endsection

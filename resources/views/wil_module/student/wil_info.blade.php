@@ -7,7 +7,7 @@
 <!-- Content -->
            
             <!-- Useful features: Start -->
-      <section id="landingFeatures" class="section-py landing-features">
+      <section id="landingFeatures" class="section-py landing-features" style="margin: 20px;">
         <div class="container">
           <div class="text-center mb-4">
             <span class="badge bg-label-primary" style="font-size: 25px;">WORK INTEGRATED LEARNING</span>

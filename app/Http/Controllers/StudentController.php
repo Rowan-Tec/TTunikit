@@ -24,7 +24,7 @@ class StudentController extends Controller
 {
     $application = Auth::user()->WilApplication;  
 
-    return view('wil_module.student.status_track',compact('application'));
+    return view('wil.student.status_track',compact('application'));
 }
 
 
@@ -40,6 +40,6 @@ class StudentController extends Controller
             ->with('error', 'You need a WIL application before making a payment.');
     }
 
-        return view('wil_module.student.payment',compact('application'));
+        return view('wil.student.payment',compact('application'));
     }
 }

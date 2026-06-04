@@ -24,7 +24,7 @@ Route::post('/wil_application',[WilApplicationController::class, 'store']);
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/payment/{application}', [PaymentController::class, 'pay'])
+    Route::post('/payment/{application}', [PaymentController::class, 'pay'])
         ->name('payment.pay');
 
     Route::get('/payment/success', [PaymentController::class, 'success'])
@@ -47,9 +47,9 @@ Route::delete('/notifications/{id}', function ($id) {
 // Student routes
 Route::middleware(['auth', 'customer'])->prefix('dashboard')->group(function () {
 
-Route::get('/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
+  Route::get('/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
   Route::get('/wil_info',[ StudentController::class, 'info'])->name('wil_info');
-  Route::get('/payment', [StudentController::class, 'payment'])->name('payment');
+  Route::get('/payment/{id}', [StudentController::class, 'payment'])->name('payment');
 
 Route::get('/status_track',[StudentController::class, 'status'] )->name('status_track');
 

@@ -76,45 +76,73 @@
               
               <div id="form-credit-card">
                 <h4 class="mt-8 mb-6">Credit Card Info</h4>
-                <form>
-                  <div class="row g-6">
-                    <div class="col-12">
-                      <label class="form-label" for="billings-card-num">Card number</label>
-                      <div class="input-group input-group-merge">
-                        <input
-                          type="text"
-                          id="billings-card-num"
-                          class="form-control billing-card-mask"
-                          placeholder="7465 8374 5837 5067"
-                          aria-describedby="paymentCard" />
-                        <span class="input-group-text cursor-pointer p-1" id="paymentCard"
-                          ><span class="card-type"></span
-                        ></span>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <label class="form-label" for="billings-card-name">Name</label>
-                      <input type="text" id="billings-card-name" class="form-control" placeholder="John Doe" />
-                    </div>
-                    <div class="col-md-3">
-                      <label class="form-label" for="billings-card-date">EXP. Date</label>
-                      <input
-                        type="text"
-                        id="billings-card-date"
-                        class="form-control billing-expiry-date-mask"
-                        placeholder="MM/YY" />
-                    </div>
-                    <div class="col-md-3">
-                      <label class="form-label" for="billings-card-cvv">CVV</label>
-                      <input
-                        type="text"
-                        id="billings-card-cvv"
-                        class="form-control billing-cvv-mask"
-                        maxlength="3"
-                        placeholder="965" />
-                    </div>
-                  </div>
-                </form>
+                <form action="{{ route('payment.pay', $application->id) }}" method="POST" id="payment-form">
+  @csrf
+  <div class="row g-6">
+    <div class="col-12">
+      <label class="form-label" for="billings-card-num">Card number <span class="text-danger">*</span></label>
+      <div class="input-group input-group-merge">
+        <input
+          type="text"
+          id="billings-card-num"
+          name="card_number"
+          class="form-control billing-card-mask @error('card_number') is-invalid @enderror"
+          placeholder="7465 8374 5837 5067"
+          aria-describedby="paymentCard"
+          required />
+        <span class="input-group-text cursor-pointer p-1" id="paymentCard">
+          <span class="card-type"></span>
+        </span>
+        @error('card_number')
+          <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label" for="billings-card-name">Name on card <span class="text-danger">*</span></label>
+      <input
+        type="text"
+        id="billings-card-name"
+        name="card_name"
+        class="form-control @error('card_name') is-invalid @enderror"
+        placeholder="John Doe"
+        required />
+      @error('card_name')
+        <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label" for="billings-card-date">EXP. Date <span class="text-danger">*</span></label>
+      <input
+        type="text"
+        id="billings-card-date"
+        name="card_expiry"
+        class="form-control billing-expiry-date-mask @error('card_expiry') is-invalid @enderror"
+        placeholder="MM/YY"
+        required />
+      @error('card_expiry')
+        <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label" for="billings-card-cvv">CVV <span class="text-danger">*</span></label>
+      <input
+        type="text"
+        id="billings-card-cvv"
+        name="card_cvv"
+        class="form-control billing-cvv-mask @error('card_cvv') is-invalid @enderror"
+        maxlength="3"
+        placeholder="965"
+        required />
+      @error('card_cvv')
+        <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+    </div>
+  </div>
+</form>
               </div>
             </div>
             <div class="col-lg-5 card-body p-md-8">
@@ -154,10 +182,12 @@
                 </div>
 
                 <div class="d-grid mt-5">
-                  <a href="{{ route('payment.pay', $application->id) }}"
-                         class="btn btn-success">
-                        Proceed with Payment
-                  </a>
+                  <div class="d-grid mt-5">
+  <button type="submit" form="payment-form" class="btn btn-success">
+    <span class="me-2">Proceed with Payment</span>
+    <i class="icon-base ti tabler-arrow-right scaleX-n1-rtl"></i>
+  </button>
+</div>
                   <!--
                   <button class="btn btn-success">
                     <span class="me-2">Proceed with Payment</span>

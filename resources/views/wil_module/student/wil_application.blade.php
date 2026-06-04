@@ -5,24 +5,37 @@
 @section('content')
 
 <style>
-         /* Upload area */
-        .upload-area {
-            border: 2px dashed #dee2e6;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: border-color 0.2s, background 0.2s;
-            background: #f8f9fa;
-        }
-        .upload-area:hover { border-color: #185FA5; background: #eef5fc; }
-        .upload-area i { font-size: 30px; color: #185FA5; display: block; margin-bottom: 6px; }
-        .upload-area p { font-size: 13px; color: #6c757d; margin: 0; }
-        .upload-area .link { color: #185FA5; font-weight: 500; }
-        .upload-area small { font-size: 11px; color: #adb5bd; }
-        .file-name { font-size: 12px; color: #185FA5; margin-top: 5px; }
+    .upload-area {
+        border: 2px dashed #dee2e6;
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        text-align: center;
+        cursor: pointer;
+        transition: border-color 0.2s, background 0.2s;
+        background: #f8f9fa;
+    }
+    .upload-area:hover { border-color: #185FA5; background: #eef5fc; }
+    .upload-area i { font-size: 30px; color: #185FA5; display: block; margin-bottom: 6px; }
+    .upload-area p { font-size: 13px; color: #6c757d; margin: 0; }
+    .upload-area .link { color: #185FA5; font-weight: 500; }
+    .upload-area small { font-size: 11px; color: #adb5bd; }
+    .file-name { font-size: 12px; color: #185FA5; margin-top: 5px; }
 
-    </style>
+    /* Selected state */
+    .upload-area.file-selected {
+        border: 2px solid #28a745;
+        background: #f0fff4;
+    }
+    .upload-area.file-selected i {
+        color: #28a745;
+    }
+    .upload-area.file-selected p {
+        color: #28a745;
+    }
+    .upload-area.file-selected small {
+        color: #6c757d;
+    }
+</style>
 
      <!-- Content -->
            

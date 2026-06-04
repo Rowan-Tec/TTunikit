@@ -37,7 +37,7 @@
           <div class="d-flex align-items-center gap-3">
             <div class="avatar">
               <span class="avatar-initial rounded bg-label-primary">
-                <i class="ti ti-gift" style="background-color: transparent; font-size:20px"></i>
+                <i class="ti ti-gift" style="background-color: transparent;"></i>
               </span>
             </div>
             <div>

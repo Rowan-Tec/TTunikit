@@ -9,9 +9,16 @@ use Illuminate\Http\Request;
 class PaymentController extends Controller
 {
 
-   public function pay($applicationId)
+   public function pay(Request $request, $applicationId)
     {
         $application = WilApplication::findOrFail($applicationId);
+
+        $request->validate([
+        'card_number' => ['required', 'string', 'min:19'], // 16 digits + 3 spaces from mask
+        'card_name'   => ['required', 'string', 'max:100'],
+        'card_expiry' => ['required', 'string', 'size:5'],  // MM/YY
+        'card_cvv'    => ['required', 'string', 'size:3'],
+    ]);
 
         $payment = Payment::firstOrCreate(
             ['application_id' => $application->id],

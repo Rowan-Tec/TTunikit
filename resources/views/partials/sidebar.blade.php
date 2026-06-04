@@ -209,12 +209,25 @@
                 <div data-i18n="STATUS TRACKING">STATUS TRACKING</div>
               </a>
             </li>
-            <li class="menu-item">
-              <a href="{{ route('payment') }}" class="menu-link">
-                <i class="menu-icon icon-base ti tabler-cash"></i>
-                <div data-i18n="WIL PAYMENT">WIL PAYMENT</div>
-              </a>
-            </li>
+            @auth
+<li class="menu-item">
+  @php
+    $application = Auth::user()->wilApplication;
+  @endphp
+  
+  @if($application)
+    <a href="{{ route('payment', $application->id) }}" class="menu-link">
+      <i class="menu-icon icon-base ti tabler-cash"></i>
+      <div data-i18n="WIL PAYMENT">WIL PAYMENT</div>
+    </a>
+  @else
+    <a href="#" class="menu-link" style="opacity: 0.5; pointer-events: none;">
+      <i class="menu-icon icon-base ti tabler-cash"></i>
+      <div data-i18n="WIL PAYMENT">WIL PAYMENT</div>
+    </a>
+  @endif
+</li>
+@endauth
 
             <!-- Apps & Pages -->
             <li class="menu-header small">

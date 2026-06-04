@@ -56,6 +56,6 @@
 
 {{-- In your layout blade file --}}
 @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+ @include('sweetalert::alert')
 </body>
 </html>

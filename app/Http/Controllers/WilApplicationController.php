@@ -25,7 +25,7 @@ class WilApplicationController extends Controller
                 ->with('info', 'Your application has already been submitted.');
         }
 
-        return view('wil_module.student.wil_application', compact('user', 'application'));
+        return view('pages.wil.student.wil_application', compact('user', 'application'));
     }
 
     // Handle form submission
@@ -102,7 +102,7 @@ class WilApplicationController extends Controller
 
         Alert::success('Application Submitted!','Please proceed to payment.');
 
-        return redirect()->route('payment')
+        return redirect()->route('payment', $application->id)
             ->with('success', 'Application submitted! Please proceed to payment.');
     }
 }

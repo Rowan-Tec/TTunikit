@@ -58,7 +58,7 @@ class AdminDashboardController extends Controller
         ])->findOrFail($id);
 
     return view(
-        'wil_module.admin.document_review',
+        'pages.wil.admin.document_review',
         compact('application')
     );
     }
@@ -74,7 +74,7 @@ public function edit($id)
         ])->findOrFail($id);
 
     return view(
-        'wil_module.admin.edit_application',
+        'pages.wil.admin.edit_application',
         compact('application')
     );
 }

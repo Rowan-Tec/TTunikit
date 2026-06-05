@@ -31,7 +31,7 @@ class AdminDashboardController extends Controller
         $underReview = WilApplication::where('status', 'under_review')->count();
         $totalStudents = User::where('role', 'student')->count();
 
-        return view('wil_module.admin.dashboard',
+        return view('pages.wil.admin.dashboard',
          compact(
          'users',
          'applications',

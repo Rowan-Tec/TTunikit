@@ -55,6 +55,17 @@ class PaymentController extends Controller
             : 'https://www.payfast.co.za/eng/process';
 
 
+            $passphrase = config('services.payfast.passphrase');
+
+           $queryString = http_build_query($data);
+
+           if ($passphrase) {
+              $queryString .= '&passphrase=' . urlencode($passphrase);
+            }
+
+            $data['signature'] = md5($queryString); 
+
+
         return redirect($url . '?' . http_build_query($data));
     }
 

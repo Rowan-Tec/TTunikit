@@ -197,20 +197,36 @@
               <span class="menu-header-text" data-i18n="STUDENT">STUDENT</span>
             </li>
             <li class="menu-item">
-              <a href="{{ route('wil_info') }}" class="menu-link">
+              <a href="{{ route('wil') }}" class="menu-link">
                 <i class="menu-icon icon-base ti tabler-file-description"></i>
-                <div data-i18n="WIL APPLICATION">WIL APPLICATION</div>
+                <div data-i18n="WIL">WIL</div>
               </a>
              </li>
 
              <li class="menu-item">
-              <a href="{{ route('status_track') }}" class="menu-link">
-                <i class="menu-icon icon-base ti tabler-progress-check"></i>
-                <div data-i18n="STATUS TRACKING">STATUS TRACKING</div>
-              </a>
-            </li>
-            @auth
+               @auth
 <li class="menu-item">
+  @php
+    $application = Auth::user()->wilApplication;
+  @endphp
+  
+  @if($application)
+    <a href="{{ route('status_track', $application->id) }}" class="menu-link">
+      <i class="menu-icon icon-base ti tabler-progress-check"></i>
+     <div data-i18n="STATUS TRACKING">STATUS TRACKING</div>
+    </a>
+  @else
+    <a href="#" class="menu-link" style="opacity: 0.5; pointer-events: none;">
+      <i class="menu-icon icon-base ti tabler-progress-check"></i>
+     <div data-i18n="STATUS TRACKING">STATUS TRACKING</div>
+    </a>
+  @endif
+</li>
+@endauth
+            </li>
+
+            @auth
+   <li class="menu-item">
   @php
     $application = Auth::user()->wilApplication;
   @endphp

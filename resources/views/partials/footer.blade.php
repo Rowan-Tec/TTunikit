@@ -215,7 +215,8 @@
     <li class="mb-2 d-flex align-items-center">
       <i class="menu-icon icon-base ti tabler-phone me-2" style="font-size: 1.25rem; color: #ccc;"></i>
       <a href="#" class="footer-link">Contact Details</a>
-    </li>
+</li\>
+
 
     <li class="mb-2 d-flex align-items-center">
       <i class="menu-icon icon-base ti tabler-users me-2" style="font-size: 1.25rem; color: #ccc;"></i>
@@ -234,7 +235,7 @@
 
     <li class="mb-2 d-flex align-items-center">
       <i class="menu-icon icon-base ti tabler-school me-2" style="font-size: 1.25rem; color: #ccc;"></i>
-      <a href="#" class="footer-link">Work Integrated Learning</a>
+      <a href="{{ route('wil') }}" class="footer-link">Work Integrated Learning</a>
     </li>
 
     <li class="mb-2 d-flex align-items-center">

@@ -19,7 +19,8 @@ Route::get('/', function () {
 
 // WIL
 
-Route::get('/wil_application',[WilApplicationController::class, 'create'])->name('wil_application');
+Route::get('/wil', function(){ return view('pages.wil');})->name('wil');
+
 Route::post('/wil_application',[WilApplicationController::class, 'store']);
 
 Route::middleware('auth')->group(function () {
@@ -48,13 +49,15 @@ Route::delete('/notifications/{id}', function ($id) {
 Route::middleware(['auth', 'customer'])->prefix('dashboard')->group(function () {
 
   Route::get('/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
-  Route::get('/wil_info',[ StudentController::class, 'info'])->name('wil_info');
   Route::get('/payment/{id}', [StudentController::class, 'payment'])->name('payment');
+  Route::get('/wil_application',[WilApplicationController::class, 'create'])->name('wil_application');
 
 Route::get('/status_track',[StudentController::class, 'status'] )->name('status_track');
 
 
 });
+
+Route::get('/wil_info',[ StudentController::class, 'info'])->name('wil_info');
 
 // Admin routes
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {

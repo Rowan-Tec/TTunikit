@@ -55,10 +55,19 @@ class VerifyEmailController extends Controller
 
     private function logoutToLogin(Request $request): RedirectResponse
     {
+
+       // Save intended URL before wiping session
+       $intendedUrl = session('url.intended.after_verify') ?? session('url.intended');
+
         Auth::logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        // Re-store the intended URL in the fresh session
+        if ($intendedUrl) {
+           session(['url.intended' => $intendedUrl]);
+        }
 
         return redirect()->route('login')
             ->with('status', 'Thank you for verifying your email, you can now login.');

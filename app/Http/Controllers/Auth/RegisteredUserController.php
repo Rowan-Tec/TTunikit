@@ -111,6 +111,11 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
+        // Persist intended URL so it survives session invalidation after verification
+if (session()->has('url.intended')) {
+    session(['url.intended.after_verify' => session('url.intended')]);
+}
+
         // If email verification is required, block access to dashboard until verified
         if (! $user->hasVerifiedEmail()) {
             $request->session()->put('verification_resend_available_at', now()->addMinutes(3)->timestamp);
@@ -118,7 +123,8 @@ class RegisteredUserController extends Controller
             return redirect()->route('verification.notice');
         }
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect()->intended(
+        route('dashboard', absolute: false));
     }
 
     private function generateReferenceCode(int $userId): string

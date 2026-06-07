@@ -36,10 +36,19 @@ class AuthenticatedSessionController extends Controller
            return redirect('/admin/dashboard');
          }
 
+         $intendedUrl = session('url.intended', route('dashboard'));
 
-         Alert::success('Login Successfully!','Welcome to your dashboard');
+         $message = str_contains($intendedUrl, 'wil_application')
+          ? 'Welcome! Please complete your WIL application.'
+          : 'Welcome to your dashboard.';
 
-        return redirect()->route('dashboard');
+        Alert::success($message);
+
+         //Alert::success('Login Successfully!','Welcome to your dashboard');
+         
+        return redirect()->intended(
+        route('dashboard')
+    );
     }
 
     /**

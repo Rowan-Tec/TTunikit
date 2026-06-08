@@ -50,7 +50,13 @@ Route::middleware(['auth', 'customer'])->prefix('dashboard')->group(function () 
 
   Route::get('/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
   Route::get('/payment/{id}', [StudentController::class, 'payment'])->name('payment');
-  Route::get('/wil_application',[WilApplicationController::class, 'create'])->name('wil_application');
+// Show the application form
+Route::get('/wil_application', [WilApplicationController::class, 'create'])
+    ->name('wil_application');
+
+    // Save the application
+Route::post('/wil_application', [WilApplicationController::class, 'store'])
+    ->name('wil_application.store');
 
 Route::get('/status_track',[StudentController::class, 'status'] )->name('status_track');
 

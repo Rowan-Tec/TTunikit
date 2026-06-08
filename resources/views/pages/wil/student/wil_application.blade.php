@@ -33,6 +33,14 @@
     color: #71dd37;
     font-weight: 600;
 }
+
+  .was-validated .upload-area:has(~ input:required) {
+    border-color: #dc3545;
+}
+
+.was-validated .upload-area.file-selected {
+    border-color: #71dd37;
+}
 </style>
 
 <!-- Your page content starts here -->
@@ -91,7 +99,7 @@
 
             <div class="col-12">
                 <label class="form-label">Physical address<span class="text-danger">*</span></label>
-                <input type="text" name="address" class="form-control" placeholder="Street, suburb, city">
+                <input type="text" name="address" class="form-control" placeholder="Street, suburb, city" required>
             </div>
         </div>
     </div>
@@ -262,7 +270,7 @@
                 </div>
 
                 <!-- SUBMIT -->
-                <div class="submit-area">
+                <div class="submit-area" style="margin-top: 25px; margin-bottom: 30px;">
                     <button type="submit" class="btn btn-primary px-5">
                         <i class='bx bx-send me-1'></i> Submit &amp; proceed to payment
                     </button>
@@ -286,29 +294,30 @@
     <div class="drag-target"></div>
 
     <script>
-function showFileName(input, targetId)
-{
+
+     
+
+function showFileName(input, targetId) {
     const fileNameDiv = document.getElementById(targetId);
-
-    if (input.files.length > 0)
-    {
+    if (input.files.length > 0) {
         const file = input.files[0];
-
-        fileNameDiv.innerHTML =
-            `<i class="bx bx-check-circle"></i> ${file.name}`;
-
+        fileNameDiv.innerHTML = `<i class="bx bx-check-circle"></i> ${file.name}`;
         const uploadArea = input.previousElementSibling;
-
         uploadArea.classList.add('file-selected');
-
         uploadArea.innerHTML = `
             <i class="bx bx-check-circle fs-1 text-success"></i>
-            <p class="mb-1 fw-bold text-success">
-                File Selected Successfully
-            </p>
+            <p class="mb-1 fw-bold text-success">File Selected Successfully</p>
             <small>${file.name}</small>
         `;
     }
 }
+
+document.getElementById('wil-form').addEventListener('submit', function (e) {
+    if (!this.checkValidity()) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    this.classList.add('was-validated');
+});
 </script>
 @endsection

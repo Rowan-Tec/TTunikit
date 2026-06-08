@@ -12,8 +12,6 @@ class StudentController extends Controller
 {
    $application = Auth::user()->wilApplication;
 
-    dd($application); 
-
     return view('dashboard',compact('application'));
 }
     public function info(){

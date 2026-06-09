@@ -1,9 +1,10 @@
-
+<?php
 
 namespace App\Http\Controllers;
 
 use App\Models\CallRequest;
 use Illuminate\Http\Request;
+
 
 class CallRequestController extends Controller
 {
@@ -40,4 +41,5 @@ class CallRequestController extends Controller
 
         return back()->with('success', 'Marked as called!');
     }
+
 }

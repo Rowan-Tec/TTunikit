@@ -536,7 +536,7 @@
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <h6 class="mb-0">{{ Auth::user()->full_name }} {{ Auth::user()->surname }}</h6>
+                            <h6 class="mb-0">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h6>
                             <small class="text-body-secondary">Admin</small>
                           </div>
                         </div>
@@ -754,9 +754,9 @@
               {{ $loop->iteration }}
             </th>
 
-            <td>{{ $user->full_name }}</td>
+            <td>{{ $user->first_name }}</td>
 
-            <td>{{ $user->surname }}</td>
+            <td>{{ $user->last_name }}</td>
 
             <td>{{ $user->email }}</td>
 
@@ -828,8 +828,8 @@
                       <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $application->id }}</td>
-                        <td>{{ $application->user->surname }}
-                             {{substr($application->user->full_name, 0, 1)}}</td>
+                        <td>{{ $application->user->last_name }}
+                             {{substr($application->user->first_name, 0, 1)}}</td>
                         <td>{{ $application->institution }}</td>
                         <td>{{ $application->field_of_study }}</td>
                         <td>{{ $application->faculty }}</td>
@@ -944,8 +944,8 @@
                       <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $approvedApp->id }}</td>
-                        <td>{{ $approvedApp->user->surname }}
-                             {{substr($approvedApp->user->full_name, 0, 1)}}</td>
+                        <td>{{ $approvedApp->user->last_name }}
+                             {{substr($approvedApp->user->first_name, 0, 1)}}</td>
                         <td>{{ $approvedApp->institution }}</td>
                         <td>{{ $approvedApp->field_of_study }}</td>
                         <td>{{ $approvedApp->faculty }}</td>
@@ -1009,8 +1009,8 @@
                       <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $rejectedApp->id }}</td>
-                        <td>{{ $rejectedApp->user->surname }}
-                             {{substr($rejectedApp->user->full_name, 0, 1)}}</td>
+                        <td>{{ $rejectedApp->user->last_name }}
+                             {{substr($rejectedApp->user->first_name, 0, 1)}}</td>
                         <td>{{ $rejectedApp->institution }}</td>
                         <td>{{ $rejectedApp->field_of_study }}</td>
                         <td>{{ $rejectedApp->faculty }}</td>
@@ -1074,8 +1074,8 @@
                       <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $reviewApp->user_id }}</td>
-                        <td>{{ $reviewApp->user->surname }}
-                             {{substr($reviewApp->user->full_name, 0, 1)}}</td>
+                        <td>{{ $reviewApp->user->last_name }}
+                             {{substr($reviewApp->user->first_name, 0, 1)}}</td>
                         <td>{{ $reviewApp->institution }}</td>
                         <td>{{ $reviewApp->field_of_study }}</td>
                         <td>{{ $reviewApp->faculty }}</td>

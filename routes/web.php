@@ -48,7 +48,7 @@ Route::delete('/notifications/{id}', function ($id) {
 })->name('notifications.delete');
 
 // Student routes
-Route::middleware(['auth', 'customer'])->prefix('dashboard')->group(function () {
+Route::middleware(['auth', 'student'])->prefix('dashboard')->group(function () {
 
   Route::get('/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
   Route::get('/payment/{id}', [StudentController::class, 'payment'])->name('payment');
@@ -91,9 +91,6 @@ Route::delete(
     [AdminDashboardController::class, 'destroy']
 )->name('destroy');
 
-  // 👇 Add this
-   Route::get('/call-requests', [CallRequestController::class, 'index'])->name('call-requests.index');
-    Route::patch('/call-requests/{callRequest}/mark-called', [CallRequestController::class, 'markAsCalled'])->name('admin.call-requests.mark-called');
 });
 
 

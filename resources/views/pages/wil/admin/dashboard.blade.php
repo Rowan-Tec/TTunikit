@@ -15,6 +15,9 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
+      {{-- 👇 Add this line --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Admin Dashboard</title>
 
     <meta name="description" content="" />
@@ -1133,7 +1136,7 @@
 
 
               <!-- Call Requests Table -->
-<div class="collapse card show" style="margin-top: 15px;" id="callRequests">
+<div class="collapse card" style="margin-top: 15px;" id="callRequests">
   <h5 class="card-header d-flex justify-content-between align-items-center">
     CALL REQUESTS
     <span class="badge bg-label-danger">
@@ -1254,6 +1257,7 @@
 
 <!-- Toastr Notifications -->
 <script>
+ 
     document.addEventListener('DOMContentLoaded', function () {
         @if(session('success'))
             toastr.success("{{ session('success') }}");
@@ -1271,6 +1275,8 @@
             toastr.info("{{ session('info') }}");
         @endif
     });
+
+
 </script>
 
   </body>

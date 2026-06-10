@@ -15,6 +15,16 @@ class CustomerMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        if (auth()->check() && auth()->user()->role === 'student') {
+            return $next($request);
+        }
+
+        // If admin, redirect to admin dashboard
+        if (auth()->check() && auth()->user()->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
+
+        // If not logged in
+        return redirect()->route('login');
     }
 }

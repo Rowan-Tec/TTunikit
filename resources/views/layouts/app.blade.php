@@ -54,8 +54,6 @@
 <script src="../../assets/js/main.js"></script>
 <script src="../../assets/js/dashboards-analytics.js"></script>
 
-{{-- In your layout blade file --}}
-@vite(['resources/css/app.css', 'resources/js/app.js'])
 
 <!-- Toastr Notifications -->
 <script>

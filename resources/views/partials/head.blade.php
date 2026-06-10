@@ -80,6 +80,11 @@
         <meta name="keywords" content="@yield('keywords')">
     @endif
 
+    {{-- In your layout blade file --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+   <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/fontawesome.css') }}">

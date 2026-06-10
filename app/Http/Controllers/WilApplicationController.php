@@ -8,7 +8,6 @@ use App\Models\WilApplication;
 use App\Models\Document;
 use App\Models\User;
 use App\Notifications\ApplicationSubmitted;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class WilApplicationController extends Controller
 {
@@ -20,7 +19,6 @@ class WilApplicationController extends Controller
 
         // If already submitted, redirect to dashboard
         if ($application && $application->status !== 'draft') {
-            Alert::alert('Already have application!','You cannot have more than one wil application.');
             return redirect()->route('dashboard')
                 ->with('info', 'Your application has already been submitted.');
         }

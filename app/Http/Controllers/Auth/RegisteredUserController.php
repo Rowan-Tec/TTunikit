@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class RegisteredUserController extends Controller
 {
@@ -93,7 +92,6 @@ class RegisteredUserController extends Controller
                 'password' => Hash::make($validated['password']),
             ]);
 
-            Alert::success('Registered Successfully!','Verify your email by code.');
 
             $user->forceFill([
                 'reference_code' => $this->generateReferenceCode($user->id),
@@ -124,7 +122,8 @@ if (session()->has('url.intended')) {
         }
 
         return redirect()->intended(
-        route('dashboard', absolute: false));
+        route('dashboard', absolute: false))->with('success', 'Welcome to TT UNIK IT SOLUTIONS! Your account has been created successfully.');
+        
     }
 
     private function generateReferenceCode(int $userId): string

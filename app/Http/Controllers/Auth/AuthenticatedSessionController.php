@@ -8,21 +8,17 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use RealRashid\SweetAlert\Facades\Alert;
+
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
+ 
     public function create(): View
     {
         return view('auth.login');
     }
 
-    /**
-     * Handle an incoming authentication request.
-     */
+
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
@@ -41,14 +37,10 @@ class AuthenticatedSessionController extends Controller
          $message = str_contains($intendedUrl, 'wil_application')
           ? 'Welcome! Please complete your WIL application.'
           : 'Welcome to your dashboard.';
-
-        Alert::success($message);
-
-         //Alert::success('Login Successfully!','Welcome to your dashboard');
          
         return redirect()->intended(
         route('dashboard')
-    );
+        )->with('success',$message);
     }
 
     /**

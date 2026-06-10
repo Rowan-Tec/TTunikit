@@ -9,3 +9,18 @@ window.axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('m
 window.Alpine = Alpine;
 
 Alpine.start();
+
+
+// Toastr
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
+
+window.toastr = toastr;
+
+// Toastr options
+toastr.options = {
+    "closeButton": true,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "timeOut": "4000",
+};

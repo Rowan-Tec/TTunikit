@@ -523,7 +523,7 @@ function submitCallRequest() {
     error.style.display   = 'none';
 
     // Basic validation
-    if (!phone || phone.length != 9 ) {
+    if (!phone || phone.length != 10 ) {
         error.style.display = 'block';
         return;
     }

@@ -205,6 +205,24 @@
               </ul>
             </li>
 
+            <!-- Call Requests -->
+<li class="menu-item">
+  <a href="javascript:void(0);" class="menu-link menu-toggle">
+    <i class="menu-icon icon-base ti tabler-phone-incoming"></i>
+    <div data-i18n="Call Requests">Call Requests</div>
+  </a>
+  <ul class="menu-sub">
+    <li class="menu-item">
+      <button class="menu-link border-0 bg-transparent w-100 text-start"
+           type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#callRequests">
+          <div data-i18n="All Call Requests">All Call Requests</div>
+     </button>
+    </li>
+  </ul>
+</li>
+
   
           </ul>
         </aside>
@@ -1114,6 +1132,65 @@
 
 
 
+              <!-- Call Requests Table -->
+<div class="collapse card show" style="margin-top: 15px;" id="callRequests">
+  <h5 class="card-header d-flex justify-content-between align-items-center">
+    CALL REQUESTS
+    <span class="badge bg-label-danger">
+      {{ $pendingCallRequests }} Pending
+    </span>
+  </h5>
+  <div class="table-responsive text-nowrap">
+    <table class="table">
+      <thead>
+        <tr class="text-nowrap">
+          <th>#</th>
+          <th>PHONE NUMBER</th>
+          <th>STATUS</th>
+          <th>REQUESTED AT</th>
+          <th>CALLED AT</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody class="table-border-bottom-0">
+        @forelse($callRequests as $callRequest)
+          <tr>
+            <th scope="row">{{ $loop->iteration }}</th>
+            <td>{{ $callRequest->phone_number }}</td>
+            <td>
+              <span class="badge bg-label-{{ 
+                $callRequest->status === 'pending'   ? 'warning' : 
+                ($callRequest->status === 'called'   ? 'success' : 'danger') 
+              }}">
+                {{ ucfirst($callRequest->status) }}
+              </span>
+            </td>
+            <td>{{ $callRequest->created_at->format('d M Y H:i') }}</td>
+            <td>{{ $callRequest->called_at ? $callRequest->called_at->format('d M Y H:i') : '—' }}</td>
+            <td>
+              @if($callRequest->status === 'pending')
+                <form action="{{ route('admin.call-requests.mark-called', $callRequest->id) }}" method="POST">
+                  @csrf
+                  @method('PATCH')
+                  <button type="submit" class="btn btn-sm btn-success">
+                    <i class="icon-base ti tabler-phone-check me-1"></i> Mark as Called
+                  </button>
+                </form>
+              @else
+                <span class="text-muted">—</span>
+              @endif
+            </td>
+          </tr>
+        @empty
+          <tr>
+            <td colspan="6" class="text-center">No call requests yet</td>
+          </tr>
+        @endforelse
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- / Call Requests Table -->
 
 
 
@@ -1172,5 +1249,29 @@
     <script src="../../assets/js/main.js"></script>
 
     <!-- Page JS -->
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+<!-- Toastr Notifications -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        @if(session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
+
+        @if(session('error'))
+            toastr.error("{{ session('error') }}");
+        @endif
+
+        @if(session('warning'))
+            toastr.warning("{{ session('warning') }}");
+        @endif
+
+        @if(session('info'))
+            toastr.info("{{ session('info') }}");
+        @endif
+    });
+</script>
+
   </body>
 </html>

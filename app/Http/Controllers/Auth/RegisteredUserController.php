@@ -118,11 +118,11 @@ if (session()->has('url.intended')) {
         if (! $user->hasVerifiedEmail()) {
             $request->session()->put('verification_resend_available_at', now()->addMinutes(3)->timestamp);
 
-            return redirect()->route('verification.notice');
+            return redirect()->route('verification.notice')->with('success', 'Welcome to TT UNIK IT SOLUTIONS! Your account has been created successfully.');
         }
 
         return redirect()->intended(
-        route('dashboard', absolute: false))->with('success', 'Welcome to TT UNIK IT SOLUTIONS! Your account has been created successfully.');
+        route('dashboard', absolute: false));
         
     }
 

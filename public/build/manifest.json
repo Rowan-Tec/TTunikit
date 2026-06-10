@@ -12,7 +12,7 @@
     "src": "node_modules/@tabler/icons-webfont/dist/fonts/tabler-icons.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-Dru3tgsU.css",
+    "file": "assets/app-CJS1mq0Z.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -21,12 +21,12 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-Dqz3F7cT.js",
+    "file": "assets/app-BU_hRLN9.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "css": [
-      "assets/app-BAI0ataL.css"
+      "assets/app-SrdJxnXX.css"
     ],
     "assets": [
       "assets/tabler-icons-CKaxJfX3.woff2",

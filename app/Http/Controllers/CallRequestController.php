@@ -39,7 +39,7 @@ class CallRequestController extends Controller
             'called_at' => now(),
         ]);
 
-        return back()->with('success', 'Marked as called!');
+        return redirect()->route('admin.dashboard')->with('success', 'Marked as called!');
     }
 
 }

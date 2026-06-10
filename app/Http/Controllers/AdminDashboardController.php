@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\WilApplication;
 use App\Models\User;
+use App\Models\CallRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Notifications\ApplicationStatusUpdated;
 
@@ -21,6 +22,7 @@ class AdminDashboardController extends Controller
         $approvedApps = WilApplication::where('status','approved')->get();
         $rejectedApps = WilApplication::where('status','rejected')->get();
         $reviewApps = WilApplication::where('status','under_review')->get();
+        $callRequests = CallRequest::latest()->get();
 
 
         //Count
@@ -30,6 +32,7 @@ class AdminDashboardController extends Controller
         $pendingPayment = WilApplication::where('status', 'pending_payment')->count();
         $underReview = WilApplication::where('status', 'under_review')->count();
         $totalStudents = User::where('role', 'student')->count();
+        $pendingCallRequests = CallRequest::where('status', 'pending')->count();
 
         return view('pages.wil.admin.dashboard',
          compact(
@@ -43,7 +46,9 @@ class AdminDashboardController extends Controller
          'rejected',
          'pendingPayment',
          'underReview',
-         'totalStudents'
+         'totalStudents',
+         'callRequests',
+         'pendingCallRequests'
          ));
     }
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\WilApplicationController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Pages;
+use App\Http\Controllers\CallRequestController;
 
 
 
@@ -89,6 +90,10 @@ Route::delete(
     '/application/{id}',
     [AdminDashboardController::class, 'destroy']
 )->name('destroy');
+
+  // 👇 Add this
+   Route::get('/call-requests', [CallRequestController::class, 'index'])->name('call-requests.index');
+    Route::patch('/call-requests/{callRequest}/mark-called', [CallRequestController::class, 'markAsCalled'])->name('admin.call-requests.mark-called');
 });
 
 

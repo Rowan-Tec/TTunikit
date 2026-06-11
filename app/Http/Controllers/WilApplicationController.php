@@ -61,6 +61,13 @@ class WilApplicationController extends Controller
                 'status'         => 'pending_payment',
             ]
         );
+
+        $request->validate([
+           'cv' => 'required|file',
+        'academic_records' => 'required|file',
+          'wil_recommendation_letter' => 'required|file',
+        'id_copy' => 'required|file',
+        ]);
         
 
         // Store each uploaded document
@@ -97,6 +104,12 @@ class WilApplicationController extends Controller
         foreach ($admins as $admin) {
         $admin->notify(new ApplicationSubmitted($application));
         }
+
+         // Update user's role
+          Auth::user()->update([
+           'role' => 'student'
+          ]);
+
         return redirect()->route('payment', $application->id)
             ->with('success', 'Application submitted! Please proceed to payment.');
     }

@@ -4,28 +4,19 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  Closure(Request): (Response)  $next
-     */
-    public function handle(Request $request, Closure $next): Response
+     public function handle(Request $request, Closure $next)
     {
-        
-        if (auth()->check() && auth()->user()->role === 'student') {
-            return $next($request);
+        /** @var \App\Models\User $user */
+          $user = Auth::user();
+
+     if (!Auth::check() || !$user->isCustomer()) {
+            abort(403, 'Access denied.');
         }
 
-        // If admin, redirect to admin dashboard
-        if (auth()->check() && auth()->user()->role === 'admin') {
-            return redirect()->route('admin.dashboard');
-        }
-
-        // If not logged in
-        return redirect()->route('login');
+        return $next($request);
     }
 }

@@ -97,9 +97,6 @@ class WilApplicationController extends Controller
         foreach ($admins as $admin) {
         $admin->notify(new ApplicationSubmitted($application));
         }
-
-        Alert::success('Application Submitted!','Please proceed to payment.');
-
         return redirect()->route('payment', $application->id)
             ->with('success', 'Application submitted! Please proceed to payment.');
     }

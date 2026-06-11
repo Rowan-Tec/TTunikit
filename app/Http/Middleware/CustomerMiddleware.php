@@ -15,6 +15,7 @@ class CustomerMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        
         if (auth()->check() && auth()->user()->role === 'student') {
             return $next($request);
         }

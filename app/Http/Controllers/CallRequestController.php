@@ -5,41 +5,38 @@ namespace App\Http\Controllers;
 use App\Models\CallRequest;
 use Illuminate\Http\Request;
 
-
 class CallRequestController extends Controller
 {
-    // Store a new call request (called from landing page)
+    // Store a new call request (public)
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'phone_number' => ['required', 'string', 'min:9', 'max:15'],
+        $request->validate([
+            'name'  => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
         ]);
 
-        CallRequest::create($validated);
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Thank you! We will call you shortly.',
-        ], 201);
-    }
-
-    // List all call requests (admin dashboard)
-    public function index()
-    {
-        $callRequests = CallRequest::latest()->paginate(20);
-
-        return view('admin.call-requests.index', compact('callRequests'));
-    }
-
-    // Mark a request as called
-    public function markAsCalled(CallRequest $callRequest)
-    {
-        $callRequest->update([
-            'status'    => 'called',
-            'called_at' => now(),
+        CallRequest::create([
+            'name'  => $request->name,
+            'phone' => $request->phone,
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Marked as called!');
+        return back()->with('success', 'We will call you back shortly!');
     }
 
+    // Mark as completed (admin)
+    public function complete($id)
+    {
+        $callRequest = CallRequest::findOrFail($id);
+        $callRequest->update(['status' => 'completed']);
+
+        return back()->with('success', 'Marked as completed.');
+    }
+
+    // Delete (admin)
+    public function destroy($id)
+    {
+        CallRequest::findOrFail($id)->delete();
+
+        return back()->with('success', 'Call request deleted.');
+    }
 }

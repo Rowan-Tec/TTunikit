@@ -86,6 +86,7 @@ element {
   <div class="col-md">
       </div>
 
+<!--  ORIGINAL 
 <div class="content-wrapper">
     <div class="col-md1">
         <section class="py-5">
@@ -129,6 +130,77 @@ element {
                             >
                                 ❌ Please enter a valid phone number.
                             </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="bg-primary p-4 mt-md-0 mt-3 rounded text-center">
+                            <h5 class="text-white fw-bold display-6 mb-3">Apply for a WIL</h5>
+                            <a class="btn btn-outline-light" href="{{ route('wil_application') }}">
+                                Apply and get started today
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div> 
+
+-->
+
+<div class="content-wrapper">
+    <div class="col-md1">
+        <section class="py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="bg-light border p-4 rounded text-center">
+
+                            <h5 class="fw-bold display-6 mb-3">Call Me Back</h5>
+
+                            {{-- Success Message --}}
+                            @if(session('success'))
+                                <div style="margin-bottom:12px; padding:10px 14px; background:#d1fae5; border:1px solid #6ee7b7; border-radius:8px; color:#065f46; font-size:14px; font-weight:500;">
+                                    ✅ {{ session('success') }}
+                                </div>
+                            @endif
+
+                            <form method="POST" action="{{ route('call_request.store') }}">
+                                @csrf
+
+                                {{-- Name --}}
+                                <input
+                                    type="text"
+                                    name="name"
+                                    class="form-control mb-2 @error('name') is-invalid @enderror"
+                                    placeholder="Your Name"
+                                    value="{{ old('name') }}"
+                                    required
+                                >
+                                @error('name')
+                                    <div class="invalid-feedback d-block text-start">{{ $message }}</div>
+                                @enderror
+
+                                {{-- Phone --}}
+                                <div class="d-flex mt-2">
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        class="form-control me-2 @error('phone') is-invalid @enderror"
+                                        placeholder="Telephone Number"
+                                        value="{{ old('phone') }}"
+                                        required
+                                    >
+                                    <button class="btn btn-primary text-nowrap" type="submit">
+                                        Call Me!
+                                    </button>
+                                </div>
+                                @error('phone')
+                                    <div class="invalid-feedback d-block text-start">{{ $message }}</div>
+                                @enderror
+
+                            </form>
 
                         </div>
                     </div>

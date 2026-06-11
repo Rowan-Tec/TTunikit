@@ -1148,6 +1148,7 @@
       <thead>
         <tr class="text-nowrap">
           <th>#</th>
+          <th>NAME</th>
           <th>PHONE NUMBER</th>
           <th>STATUS</th>
           <th>REQUESTED AT</th>
@@ -1159,7 +1160,8 @@
         @forelse($callRequests as $callRequest)
           <tr>
             <th scope="row">{{ $loop->iteration }}</th>
-            <td>{{ $callRequest->phone_number }}</td>
+            <td>{{ $callRequest->name }}</td>
+            <td>{{ $callRequest->phone }}</td>
             <td>
               <span class="badge bg-label-{{ 
                 $callRequest->status === 'pending'   ? 'warning' : 

@@ -73,6 +73,10 @@ Route::middleware(['auth', 'student'])->prefix('dashboard')->group(function () {
     Route::get('/wil_info', [StudentController::class, 'info'])->name('wil_info');
 });
 
+// Public - anyone can submit
+Route::post('/call-request', [CallRequestController::class, 'store'])
+    ->name('call_request.store');
+
 // Admin routes
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
@@ -84,6 +88,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/application/{id}/edit_application', [AdminDashboardController::class, 'edit'])->name('edit_application');
     Route::put('/application/{id}', [AdminDashboardController::class, 'update'])->name('update');
     Route::delete('/application/{id}', [AdminDashboardController::class, 'destroy'])->name('destroy');
+
+    Route::patch('/call-request/{id}/complete', [CallRequestController::class, 'complete'])
+        ->name('call_request.complete');
+    Route::delete('/call-request/{id}', [CallRequestController::class, 'destroy'])
+        ->name('call_request.destroy');
 });
 
 require __DIR__.'/auth.php';

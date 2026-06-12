@@ -12,6 +12,9 @@ use App\Http\Controllers\CallRequestController;
 // Welcome
 Route::get('/', function () {
     if (auth()->check()) {
+        if (auth()->user()->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
         return redirect()->route('dashboard');
     }
     return view('welcome');

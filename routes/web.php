@@ -61,20 +61,21 @@ Route::middleware('auth')->group(function () {
 });
 
 // Customer routes (wil application only)
-Route::middleware(['auth', 'customer'])->prefix('dashboard')->group(function () {
-    
+Route::middleware(['auth', 'role:student,customer'])->prefix('dashboard')->group(function () {
+   Route::get('/wil_application', [WilApplicationController::class, 'create'])->name('wil_application');
+    Route::post('/wil_application', [WilApplicationController::class, 'store'])->name('wil_application.store');
 });
 
 Route::get('/dashboard', [StudentController::class, 'index'])->name('dashboard');
 
-Route::get('/wil_application', [WilApplicationController::class, 'create'])->name('wil_application');
-Route::post('/wil_application', [WilApplicationController::class, 'store'])->name('wil_application.store');
-Route::get('/status_track', [StudentController::class, 'status'])->name('status_track');
+
 
 // Student routes
 Route::middleware(['auth', 'student'])->prefix('dashboard')->group(function () {
     Route::get('/dashboard', [StudentController::class, 'index'])->name('dashboard');
+    
     Route::get('/payment/{id}', [StudentController::class, 'payment'])->name('payment');
+    Route::get('/status_track', [StudentController::class, 'status'])->name('status_track');
     Route::get('/wil_info', [StudentController::class, 'info'])->name('wil_info');
 });
 

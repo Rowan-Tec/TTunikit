@@ -167,40 +167,44 @@ element {
                             @endif
 
                             <form method="POST" action="{{ route('call_request.store') }}">
-                                @csrf
+    @csrf
 
-                                {{-- Name --}}
-                                <input
-                                    type="text"
-                                    name="name"
-                                    class="form-control mb-2 @error('name') is-invalid @enderror"
-                                    placeholder="Your Name"
-                                    value="{{ old('name') }}"
-                                    required
-                                >
-                                @error('name')
-                                    <div class="invalid-feedback d-block text-start">{{ $message }}</div>
-                                @enderror
+    <div class="d-flex gap-2 align-items-start">
+        {{-- Name --}}
+        <div class="flex-grow-1">
+            <input
+                type="text"
+                name="name"
+                class="form-control @error('name') is-invalid @enderror"
+                placeholder="Your Name"
+                value="{{ old('name') }}"
+                required
+            >
+            @error('name')
+                <div class="invalid-feedback d-block">{{ $message }}</div>
+            @enderror
+        </div>
 
-                                {{-- Phone --}}
-                                <div class="d-flex mt-2">
-                                    <input
-                                        type="tel"
-                                        name="phone"
-                                        class="form-control me-2 @error('phone') is-invalid @enderror"
-                                        placeholder="Telephone Number"
-                                        value="{{ old('phone') }}"
-                                        required
-                                    >
-                                    <button class="btn btn-primary text-nowrap" type="submit">
-                                        Call Me!
-                                    </button>
-                                </div>
-                                @error('phone')
-                                    <div class="invalid-feedback d-block text-start">{{ $message }}</div>
-                                @enderror
+        {{-- Phone --}}
+        <div class="flex-grow-1">
+            <input
+                type="tel"
+                name="phone"
+                class="form-control @error('phone') is-invalid @enderror"
+                placeholder="Telephone Number"
+                value="{{ old('phone') }}"
+                required
+            >
+            @error('phone')
+                <div class="invalid-feedback d-block">{{ $message }}</div>
+            @enderror
+        </div>
 
-                            </form>
+        <button class="btn btn-primary text-nowrap" type="submit">
+            Call Me!
+        </button>
+    </div>
+</form>
 
                         </div>
                     </div>

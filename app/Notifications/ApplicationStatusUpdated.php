@@ -27,7 +27,7 @@ class ApplicationStatusUpdated extends Notification
             'status'         => $this->application->status,
             'type'           => $this->application->status,
             'message'        => "Your application \"{$this->application->title}\" has been marked as {$this->application->status}.",
-            'url'            => route('student.dashboard'),
+            'url'            => route('dashboard'),
             'updated_at'     => now()->toDateTimeString(),
         ];
     }

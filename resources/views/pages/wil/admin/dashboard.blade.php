@@ -98,8 +98,8 @@
                   <button class="menu-link border-0 bg-transparent w-100 text-start"
                        type="button"
                       data-bs-toggle="collapse"
-                      data-bs-target="#appAvail">
-                      <onclick="event.stopPropagation()">
+                      data-bs-target="#appAvail"
+                      onclick="event.stopPropagation()">
                       <div data-i18n="Total Wil Application">Total Wil Application</div>
                  </button>
                 </li>
@@ -980,6 +980,7 @@
 
 
               <!--/ Responsive Table -->
+              
 <!-- Responsive Table For Rejected Applications-->
               <div class="collapse   card" style="margin-top: 15px;" id="rejectedApp">
                 <h5 class="card-header">REJECTED APPLICATIONS</h5>
@@ -1149,7 +1150,7 @@
             <td>{{ $callRequest->called_at ? $callRequest->called_at->format('d M Y H:i') : '—' }}</td>
             <td>
               @if($callRequest->status === 'pending')
-                <form action="{{ route('admin.call-requests.mark-called', $callRequest->id) }}" method="POST">
+                <form action="{{ route('call_request.complete', $callRequest->id) }}" method="POST">
                   @csrf
                   @method('PATCH')
                   <button type="submit" class="btn btn-sm btn-success">

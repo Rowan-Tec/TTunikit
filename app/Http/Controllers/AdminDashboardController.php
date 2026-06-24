@@ -27,6 +27,7 @@ class AdminDashboardController extends Controller
 
         //Count
         $appCount = WilApplication::count();
+        $totalUsers = User::count();
         $approveCount = WilApplication::where('status','approved')->count();
         $rejected = WilApplication::where('status', 'rejected')->count();
         $pendingPayment = WilApplication::where('status', 'pending_payment')->count();
@@ -46,7 +47,7 @@ class AdminDashboardController extends Controller
          'rejected',
          'pendingPayment',
          'underReview',
-         'totalStudents',
+         'totalUsers',
          'callRequests',
          'pendingCallRequests'
          ));

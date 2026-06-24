@@ -71,8 +71,8 @@
                           <label class="form-label" for="basic-default-country">STATUS</label>
                           <select class="form-select" id="basic-default-country" name="status" required>
                             <option value="">Update Status</option>
-                            <option value="payment_pending" 
-                                {{ $application->status == 'payment_pending' ? 'selected' : '' }}>
+                            <option value="pending_payment" 
+                                {{ $application->status == 'pending_payment' ? 'selected' : '' }}>
                                  Payment Pending
                             </option>
                             <option value="under_review"

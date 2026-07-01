@@ -18,7 +18,7 @@ class WillApplicationSuccessMail extends Mailable
     public function build()
     {
         return $this->subject('Your Will Application Was Successful')
-            ->view('emails.will_application')
+            ->view('emails.wil_application')
             ->with([
                 'name' => $this->user->name,
                 'application' => $this->application,

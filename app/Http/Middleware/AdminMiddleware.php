@@ -14,7 +14,7 @@ class AdminMiddleware
         $user = Auth::user();
 
         if (!Auth::check() || !$user->isAdmin()) {
-            abort(403, 'Access denied.');
+            abort(401, 'Access denied.');
         }
 
         return $next($request);

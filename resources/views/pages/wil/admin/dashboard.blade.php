@@ -49,6 +49,7 @@
             <a href="index.html" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <span class="text-primary">
+                <!--
                   <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       fill-rule="evenodd"
@@ -73,9 +74,13 @@
                       d="M7.77295 16.3566L23.6563 0H32V6.88383C32 6.88383 31.8262 9.17836 30.6591 10.4057L19.7824 22H13.6938L7.77295 16.3566Z"
                       fill="currentColor" />
                   </svg>
+                -->
+
+                   <img src="../../assets/img/branding/LogoWhiteMode.png" alt />
+
                 </span>
               </span>
-              <span class="app-brand-text demo menu-text fw-bold ms-3">Vuexy</span>
+              <!-- <span class="app-brand-text demo menu-text fw-bold ms-3">Vuexy</span> -->
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -98,8 +103,7 @@
                   <button class="menu-link border-0 bg-transparent w-100 text-start"
                        type="button"
                       data-bs-toggle="collapse"
-                      data-bs-target="#appAvail"
-                      onclick="event.stopPropagation()">
+                      data-bs-target="#appAvail">
                       <div data-i18n="Total Wil Application">Total Wil Application</div>
                  </button>
                 </li>
@@ -201,6 +205,52 @@
   </ul>
 </li>
 
+<!-- e-Commerce -->
+          <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon icon-base ti tabler-tag"></i>
+                <!-- <i class="menu-icon icon-base ti tabler-smart-home"></i> -->
+                <div data-i18n="Store">Store</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <button class="menu-link border-0 bg-transparent w-100 text-start"
+                       type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#storeProducts">
+                      <div data-i18n="Products">Products</div>
+                 </button>
+                </li>
+                <li class="menu-item">
+                  <button class="menu-link border-0 bg-transparent w-100 text-start"
+                       type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#storeNull1">
+                      <div data-i18n="Null">Null</div>
+                 </button>   
+                </li>
+                <li class="menu-item">
+                  <button class="menu-link border-0 bg-transparent w-100 text-start"
+                       type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#storeNull2">
+                      <div data-i18n="Null">Null</div>
+                 </button>
+                </li>
+                <li class="menu-item">
+                  <button class="menu-link border-0 bg-transparent w-100 text-start"
+                       type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#storeNull3">
+                      <div data-i18n="Null">Null</div>
+                 </button>
+                </li>
+              </ul>
+            </li>
+
+            <button data-bs-toggle="collapse" data-bs-target="#appAvail" class="btn btn-primary">
+    Test Toggle
+</button>
   
           </ul>
         </aside>
@@ -799,7 +849,7 @@
 </div>
 <!--/ Responsive Table -->
 <!-- Responsive Table For Applications Available-->
-              <div class="collapse card" style="margin-top: 15px;" id="appAvail">
+              <div class="collapse" style="margin-top: 15px;" id="appAvail">
                 <h5 class="card-header">ALL APPLICATIONS</h5>
                 <div class="table-responsive text-nowrap">
                   <table class="table">
@@ -1242,6 +1292,14 @@
     });
 
 
+</script>
+
+<script>
+    document.querySelector('[data-bs-target="#appAvail"]').addEventListener('click', function() {
+        console.log('button clicked');
+        var el = document.querySelector('#appAvail');
+        console.log('element classes:', el.className);
+    });
 </script>
 
   </body>

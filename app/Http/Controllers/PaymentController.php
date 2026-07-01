@@ -72,14 +72,14 @@ class PaymentController extends Controller
     public function success()
     {
         return redirect()
-            ->route('student.dashboard')
+            ->route('dashboard')
             ->with('success', 'Payment received.');
     }
 
     public function cancel()
     {
         return redirect()
-            ->route('student.dashboard')
+            ->route('dashboard')
             ->with('error', 'Payment cancelled.');
     }
 

@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 
 class VerifyEmailController extends Controller
 {
@@ -24,7 +26,7 @@ class VerifyEmailController extends Controller
         $user = $request->user();
 
         if ($user->hasVerifiedEmail()) {
-            return $this->logoutToLogin($request);
+            return $this->logoutToLogin($request); // no welcome email here
         }
 
         if (! $user->email_verification_code || ! $user->email_verification_code_expires_at) {
@@ -48,6 +50,9 @@ class VerifyEmailController extends Controller
         if ($user->markEmailAsVerified()) {
             $user->clearEmailVerificationCode();
             event(new Verified($user));
+
+            // Only send the welcome email on the actual successful verification
+            Mail::to($user->email)->send(new WelcomeMail($user));
         }
 
         return $this->logoutToLogin($request);
@@ -55,9 +60,8 @@ class VerifyEmailController extends Controller
 
     private function logoutToLogin(Request $request): RedirectResponse
     {
-
-       // Save intended URL before wiping session
-       $intendedUrl = session('url.intended.after_verify') ?? session('url.intended');
+        // Save intended URL before wiping session
+        $intendedUrl = session('url.intended.after_verify') ?? session('url.intended');
 
         Auth::logout();
 
@@ -66,7 +70,7 @@ class VerifyEmailController extends Controller
 
         // Re-store the intended URL in the fresh session
         if ($intendedUrl) {
-           session(['url.intended' => $intendedUrl]);
+            session(['url.intended' => $intendedUrl]);
         }
 
         return redirect()->route('login')

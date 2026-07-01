@@ -8,6 +8,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Mail\LoginNotificationMail;
+use Illuminate\Support\Facades\Mail;
 
 
 class AuthenticatedSessionController extends Controller
@@ -38,6 +40,10 @@ class AuthenticatedSessionController extends Controller
           ? 'Welcome! Please complete your WIL application.'
           : 'Welcome to your dashboard.';
          
+
+          // after Auth::attempt() succeeds
+        Mail::to($user->email)->send(new LoginNotificationMail($user)); 
+
         return redirect()->intended(
         route('dashboard')
         )->with('success',$message);

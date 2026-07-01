@@ -8,6 +8,8 @@ use App\Models\WilApplication;
 use App\Models\Document;
 use App\Models\User;
 use App\Notifications\ApplicationSubmitted;
+use App\Mail\WillApplicationSuccessMail;
+use Illuminate\Support\Facades\Mail;
 
 class WilApplicationController extends Controller
 {
@@ -110,6 +112,9 @@ class WilApplicationController extends Controller
            'role' => 'student'
           ]);
 
+          // after the application is saved successfully
+         Mail::to($user->email)->send(new WillApplicationSuccessMail($user, $application));
+         
         return redirect()->route('payment', $application->id)
             ->with('success', 'Application submitted! Please proceed to payment.');
     }

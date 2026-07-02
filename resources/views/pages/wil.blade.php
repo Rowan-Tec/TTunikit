@@ -6,9 +6,7 @@
 
 <style>
     
-    
-element {
-}
+
 .layout-page, .content-wrapper, .content-wrapper > *, .layout-menu {
   min-block-size: 1px;
 }
@@ -45,7 +43,7 @@ element {
 
 <div class="content-wrapper">
             <!-- Content -->
-<div class="col-md">
+  <div class="col-md">
 
       <div id="carouselExampleDark" class="carousel carousel-dark slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -299,7 +297,7 @@ Our WIL platform unlocks opprotunities of candicates to become employble or star
 
                         <div class="card accordion-item">
                           <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionPayment-2" aria-controls="accordionPayment-2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionPayment-2" aria-controls="accordionPayment-2"></button>
                               How do I pay for my Registration Fee?
                           </h2>
                           <div id="accordionPayment-2" class="accordion-collapse collapse">
@@ -577,15 +575,11 @@ As our company grows and demand for WIL increases, we have decided to introduce 
               </div>
             </div>
             <!-- / Content -->
-
-            <div class="content-backdrop fade"></div>
-          </div>
             <div class="content-backdrop fade"></div>
           </div>
 
-          {{-- In your main layout --}}
-@vite(['resources/js/app.js'])
-
+          
+{{--
 
           <script>
 function submitCallRequest() {
@@ -623,5 +617,7 @@ function submitCallRequest() {
         });
 }
 </script>
+--}}
+
 
  @endsection

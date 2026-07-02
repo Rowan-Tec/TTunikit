@@ -46,10 +46,9 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu">
           <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
+            <a href="#" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <span class="text-primary">
-<<<<<<< HEAD
                 <!--
                   <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -82,13 +81,6 @@
                 </span>
               </span>
               <!-- <span class="app-brand-text demo menu-text fw-bold ms-3">Vuexy</span> -->
-=======
-                    <img src="../../assets/img/branding/LogoWhiteMode.png" alt />
-                </span>
-              </span>
-              <!-- Name for logo on sidemenu -->
-              <!-- <span class="app-brand-text demo menu-text fw-bold ms-3">TT unik IT</span> -->
->>>>>>> 196d4e1031b77de4c33de65438ff06dafe39ed17
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -213,13 +205,7 @@
   </ul>
 </li>
 
-<<<<<<< HEAD
 <!-- e-Commerce -->
-=======
-
-
- <!-- e-Commerce -->
->>>>>>> 196d4e1031b77de4c33de65438ff06dafe39ed17
           <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon icon-base ti tabler-tag"></i>
@@ -231,12 +217,7 @@
                   <button class="menu-link border-0 bg-transparent w-100 text-start"
                        type="button"
                       data-bs-toggle="collapse"
-<<<<<<< HEAD
                       data-bs-target="#storeProducts">
-=======
-                      data-bs-target="#appAvail"
-                      onclick="event.stopPropagation()">
->>>>>>> 196d4e1031b77de4c33de65438ff06dafe39ed17
                       <div data-i18n="Products">Products</div>
                  </button>
                 </li>
@@ -244,11 +225,7 @@
                   <button class="menu-link border-0 bg-transparent w-100 text-start"
                        type="button"
                       data-bs-toggle="collapse"
-<<<<<<< HEAD
                       data-bs-target="#storeNull1">
-=======
-                      data-bs-target="#approvedApp">
->>>>>>> 196d4e1031b77de4c33de65438ff06dafe39ed17
                       <div data-i18n="Null">Null</div>
                  </button>   
                 </li>
@@ -256,11 +233,7 @@
                   <button class="menu-link border-0 bg-transparent w-100 text-start"
                        type="button"
                       data-bs-toggle="collapse"
-<<<<<<< HEAD
                       data-bs-target="#storeNull2">
-=======
-                      data-bs-target="#rejectedApp">
->>>>>>> 196d4e1031b77de4c33de65438ff06dafe39ed17
                       <div data-i18n="Null">Null</div>
                  </button>
                 </li>
@@ -268,23 +241,13 @@
                   <button class="menu-link border-0 bg-transparent w-100 text-start"
                        type="button"
                       data-bs-toggle="collapse"
-<<<<<<< HEAD
                       data-bs-target="#storeNull3">
-=======
-                      data-bs-target="#reviewApp">
->>>>>>> 196d4e1031b77de4c33de65438ff06dafe39ed17
                       <div data-i18n="Null">Null</div>
                  </button>
                 </li>
               </ul>
             </li>
 
-<<<<<<< HEAD
-            <button data-bs-toggle="collapse" data-bs-target="#appAvail" class="btn btn-primary">
-    Test Toggle
-</button>
-=======
->>>>>>> 196d4e1031b77de4c33de65438ff06dafe39ed17
   
           </ul>
         </aside>

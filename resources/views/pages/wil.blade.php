@@ -297,8 +297,9 @@ Our WIL platform unlocks opprotunities of candicates to become employble or star
 
                         <div class="card accordion-item">
                           <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionPayment-2" aria-controls="accordionPayment-2"></button>
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionPayment-2" aria-controls="accordionPayment-2">
                               How do I pay for my Registration Fee?
+                            </button> 
                           </h2>
                           <div id="accordionPayment-2" class="accordion-collapse collapse">
                             <div class="accordion-body">

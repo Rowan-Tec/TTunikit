@@ -20,6 +20,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// e-commerce
+
+Route::get('/shop', function () {
+    return view('pages.shop');
+})->name('shop');
+
 // Public WIL info page
 Route::get('/wil', function () {
     return view('pages.wil');

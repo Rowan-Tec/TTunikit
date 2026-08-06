@@ -34,7 +34,7 @@
         </a>
         <ul class="menu-sub">
                <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link">
+            <a href="{{ route('shop') }}" class="menu-link">
               <i class="menu-icon icon-base ti tabler-shopping-cart"></i>
               <div>Shop</div>
             </a>
